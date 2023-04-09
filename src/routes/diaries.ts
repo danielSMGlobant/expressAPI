@@ -1,6 +1,7 @@
 import express from 'express'
 import * as diaryServices from '../services/diariesServices'
 import { NewDiaryEntry } from '../types'
+import toNewDiaryEntry from '../utils'
 
 const router = express.Router()
 
@@ -25,7 +26,7 @@ router.post('/', (req, res) => {
   // res.json(newDiaryEntry)
 
   try {
-    const data: NewDiaryEntry = req.body
+    const data: NewDiaryEntry = toNewDiaryEntry(req.body)
     const newDiaryEntry = diaryServices.addDiary(data)
     res.json(newDiaryEntry)
   } catch (error: any) {
