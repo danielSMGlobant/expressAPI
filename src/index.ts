@@ -6,6 +6,11 @@ const PORT = 3000
 
 app.use(express.json())
 
+// GET demo para ver que funcione
+app.get('/', (_req, res) => {
+  res.send('Hello Full Stack!')
+})
+
 app.get('/ping', (_req, res) => {
   // si no usas uno de los parametros puedes ponerle un guion abajo para que no alerte
   console.log('some pigned here!!')
