@@ -1,5 +1,5 @@
 import { Visibility, Weather } from './enums'
-import { NewDiaryEntry } from './types'
+import { NewDiaryEntry, NewImc } from './types'
 
 const parseComment = (commentFromRequest: any): string => {
   if (!isString(commentFromRequest)) {
@@ -23,7 +23,10 @@ const parseWeather = (weatherFromRequest: any): Weather => {
 }
 
 const parseVisibility = (visibilityFromRequest: any): Visibility => {
-  if (!isString(visibilityFromRequest) || !isVisibility(visibilityFromRequest)) {
+  if (
+    !isString(visibilityFromRequest) ||
+    !isVisibility(visibilityFromRequest)
+  ) {
     throw new Error('Incorrect or missing visibility')
   }
   return visibilityFromRequest
@@ -45,7 +48,7 @@ const isVisibility = (param: any): boolean => {
   return Object.values(Visibility).includes(param)
 }
 
-const toNewDiaryEntry = (object: any): NewDiaryEntry => {
+export const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   const newData: NewDiaryEntry = {
     comment: parseComment(object.comment),
     date: parseDate(object.date),
@@ -56,4 +59,32 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   return newData
 }
 
-export default toNewDiaryEntry
+export const validateQueryString = (queryParmeters: object): any => {
+  if (Object.keys(queryParmeters).length === 0) {
+    throw new Error('No se envio ningun valor en los parametros')
+  }
+  return queryParmeters
+}
+
+const parseWeight = (weightFromRequest: any): number => {
+  if (isNaN(weightFromRequest)) {
+    throw new Error('No se envio correctamente el valor de weight')
+  }
+  return weightFromRequest
+}
+
+const parseHeight = (heightFromRequest: any): number => {
+  if (isNaN(heightFromRequest)) {
+    throw new Error('No se envio correctamente el valor de height')
+  }
+  return heightFromRequest
+}
+
+export const toNewImc = (object: any): NewImc => {
+  const newData: NewImc = {
+    weight: parseWeight(object.weight),
+    height: parseHeight(object.height)
+  }
+
+  return newData
+}

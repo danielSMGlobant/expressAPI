@@ -1,5 +1,6 @@
 import express from 'express'
 import diaryRouter from './routes/diaries'
+import bmiRouter from './routes/bmi'
 
 const app = express()
 const PORT = 3000
@@ -17,7 +18,8 @@ app.get('/ping', (_req, res) => {
   res.send('pong - pong')
 })
 
-app.use('/api/diaries', diaryRouter)
+app.use('/api/diaries', diaryRouter) // Ejemplo API Diario de Vuelo
+app.use('/bmi', bmiRouter)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

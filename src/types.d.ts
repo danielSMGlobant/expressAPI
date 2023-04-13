@@ -14,3 +14,11 @@ export interface DiaryEntry {
 // export type DiaryEntryWithoutComments = Pick<DiaryEntry, 'id' | 'date'>
 export type DiaryEntryWithoutComments = Omit<DiaryEntry, 'comment'> // Con esto puedo eliminar una propiedad de una interface para reusarlo
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
+
+export interface Imc {
+  weight: number
+  height: number
+  bmi: string
+}
+
+export type NewImc = Omit<Imc, 'bmi'>

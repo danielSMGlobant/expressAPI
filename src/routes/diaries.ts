@@ -1,7 +1,7 @@
 import express from 'express'
 import * as diaryServices from '../services/diariesServices'
 import { NewDiaryEntry } from '../types'
-import toNewDiaryEntry from '../utils'
+import { toNewDiaryEntry } from '../utils'
 
 const router = express.Router()
 
