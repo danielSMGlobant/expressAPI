@@ -88,3 +88,15 @@ export const toNewImc = (object: any): NewImc => {
 
   return newData
 }
+
+const isTioaux = (value: string): boolean => {
+  const regex = /^[a-zA-Z0-9]{6}$/
+  return regex.test(value)
+}
+
+export const validateTioAux = (value: string): string => {
+  if (!isTioaux(value)) {
+    throw new Error('No se envio el valor tioAux correcto')
+  }
+  return value
+}

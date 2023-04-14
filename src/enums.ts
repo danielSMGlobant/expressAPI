@@ -15,3 +15,13 @@ export enum Visibility {
   Ok = 'ok',
   Poor = 'poor'
 }
+
+export enum NameBrand {
+  Amex = 'AMEX',
+  Visa = 'VISA',
+}
+
+export enum ProgramBenefitCode {
+  Latampass = 'LATAMPASS',
+  Null = 'null',
+}
