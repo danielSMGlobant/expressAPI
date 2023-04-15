@@ -96,7 +96,7 @@ const isTioaux = (value: string): boolean => {
 
 export const validateTioAux = (value: string): string => {
   if (!isTioaux(value)) {
-    throw new Error('No se envio el valor tioAux correcto')
+    throw new Error('No se envio el valor correcto del parámetro tioAux')
   }
   return value
 }

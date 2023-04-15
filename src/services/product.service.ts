@@ -19,3 +19,11 @@ export const addProductTc = (newData: ProductTcRequest): string => {
   productsTc.push(newData)
   return 'Se logró exponer de manera exitosa'
 }
+
+export const deleteProductTc = (tioAuxRequest: string): string => {
+  const index = productsTc.findIndex((d) => d.tio_aux === tioAuxRequest)
+
+  productsTc.splice(index, 1)
+
+  return 'Producto Tc eliminado exitosamente'
+}
