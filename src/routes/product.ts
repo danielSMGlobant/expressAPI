@@ -48,7 +48,7 @@ router.delete('/:tioAux', (req, res) => {
     if (product === undefined) {
       res.status(404).send('Producto Tc no existe') // Not Found - El recurso solicitado no existe
     } else {
-      const respuesta = productServices.deleteProductTc(product.tio_aux)
+      const respuesta = productServices.deleteProductTc(product.tioAux)
       res.send(respuesta)
     }
   } catch (error: any) {

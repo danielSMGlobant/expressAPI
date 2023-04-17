@@ -1,4 +1,4 @@
-import { NameBrand, Visibility, Weather } from './enums'
+import { brandName, Visibility, Weather } from './enums'
 import { NewDiaryEntry, NewImc } from './types'
 
 const parseComment = (commentFromRequest: any): string => {
@@ -102,5 +102,5 @@ export const validateTioAux = (value: string): string => {
 }
 
 export const isBrand = (param: any): boolean => {
-  return Object.values(NameBrand).includes(param)
+  return Object.values(brandName).includes(param)
 }

@@ -1,7 +1,7 @@
 // export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy'
 // export type Visibility = 'great' | 'good' | 'ok' | 'poor'
 
-import { NameBrand, ProgramBenefitCode, Visibility, Weather } from './enums'
+import { brandName, ProgramBenefitCode, Visibility, Weather } from './enums'
 
 export interface DiaryEntry {
   id: number
@@ -25,17 +25,35 @@ export type NewImc = Omit<Imc, 'bmi'>
 
 export interface ProductTc {
   bin: string
-  logo: string
-  tio_aux: string
-  name: string
-  name_commercial: string
-  name_brand: NameBrand
-  plastic_value: string
+  logoCode: string
+  tioAux: string
+  binStart: string
+  binEnd: string
+  productName: string
+  commercialName: string
+  brandName: brandName
+  creditCardLevel: string
   status: string
-  plastic_choice: string
+  plasticChoice: string
   nickname: string
-  min_credit_card_line: string
-  program_benefit_code: ProgramBenefitCode
+  minCreditLine: string
+  maxCreditLine: string
+  programBenefitCode: ProgramBenefitCode
+  urlDesk: String
+  urlMobile: String
 }
 
+export type ProductsTc = Omit<
+ProductTc,
+| 'binStart'
+| 'binEnd'
+| 'productName'
+| 'creditCardLevel'
+| 'plasticChoice'
+| 'nickname'
+| 'minCreditLine'
+| 'maxCreditLine'
+| 'programBenefitCode'
+| 'urlMobile'
+>
 export type ProductTcRequest = ProductTc

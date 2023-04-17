@@ -14,24 +14,24 @@ const patternTioAux = /^[a-zA-Z0-9]{6}$/
 
 export const validatorCreateProduct = [
   check('bin').exists().not().isEmpty().isString(),
-  check('logo')
+  check('logoCode')
     .exists()
     .not()
     .isEmpty()
     .isString()
     .withMessage('Debe ser caracteres')
     .isLength({ min: 3, max: 3 })
-    .withMessage('Valor de un logo es de 3 carácteres'),
-  check('tio_aux')
+    .withMessage('Valor de un logoCode es de 3 carácteres'),
+  check('tioAux')
     .exists()
     .not()
     .isEmpty()
     .isString()
     .matches(patternTioAux)
-    .withMessage('No cumple con la estructura de un Tio_Aux'),
+    .withMessage('No cumple con la estructura de un tioAux'),
   check('name').exists().not().isEmpty().isString(),
-  check('name_commercial').exists().not().isEmpty().isString(),
-  check('name_brand').exists().notEmpty().isString().custom(isBrandValidate)
+  check('commercialName').exists().not().isEmpty().isString(),
+  check('brandName').exists().notEmpty().isString().custom(isBrandValidate)
 
   //   (req: any, res: any, next: any) => {
   //     console.log(req.body)

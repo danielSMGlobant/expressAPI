@@ -1,12 +1,24 @@
-import { ProductTc, ProductTcRequest } from './../types.d'
+import { ProductTc, ProductTcRequest, ProductsTc } from './../types.d'
 import productData from '../data/productTc.json'
 
 const productsTc: ProductTc[] = productData as ProductTc[]
 
-export const getProductTc = (): ProductTc[] => productsTc
+export const getProductTc = (): ProductsTc[] => {
+  const products = productsTc.map(item => ({
+    bin: item.bin,
+    logoCode: item.logoCode,
+    tioAux: item.tioAux,
+    commercialName: item.commercialName,
+    brandName: item.brandName,
+    status: item.status,
+    urlDesk: item.urlDesk
+  }))
+
+  return products
+}
 
 export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
-  const product = productsTc.find((d) => d.tio_aux === tioAuxRequest)
+  const product = productsTc.find((d) => d.tioAux === tioAuxRequest)
 
   if (product != null) {
     return product
@@ -21,7 +33,7 @@ export const addProductTc = (newData: ProductTcRequest): string => {
 }
 
 export const deleteProductTc = (tioAuxRequest: string): string => {
-  const index = productsTc.findIndex((d) => d.tio_aux === tioAuxRequest)
+  const index = productsTc.findIndex((d) => d.tioAux === tioAuxRequest)
 
   productsTc.splice(index, 1)
 
