@@ -17,7 +17,7 @@ export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
 
 export const addProductTc = (newData: ProductTcRequest): string => {
   productsTc.push(newData)
-  return 'Se logró exponer de manera exitosa'
+  return 'Se logró insertar de manera exitosa'
 }
 
 export const deleteProductTc = (tioAuxRequest: string): string => {

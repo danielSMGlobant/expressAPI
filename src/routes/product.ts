@@ -1,6 +1,9 @@
 import { validateTioAux } from './../utils'
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import * as productServices from '../services/product.service'
+import { validatorCreateProduct } from '../validators/product'
+import { validateResult } from '../helpers/validateHelper'
+
 // import { ProductTcRequest } from '../types'
 const router = express.Router()
 
@@ -22,17 +25,19 @@ router.get('/:tioAux', (req, res) => {
   }
 })
 
-router.post('/', (req, res) => {
+// Ruta POST para crear un nuevo producto
+router.post('/', validatorCreateProduct, (req: Request, res: Response, next: NextFunction) => {
   try {
-    // const data: ProductTcRequest = toNewProductTc(req.body)
-    const respuesta = productServices.addProductTc(req.body)
-    res.send(respuesta)
+    validateResult(req, res, next)
+    const product = req.body
+    const respuesta = productServices.addProductTc(product)
+    res.status(201).json({ message: respuesta, product })
   } catch (error) {
-    res.status(400).send(error) // Bad Request - La solicitud no es válida o tiene parámetros incorrectos
+    // console.log('error', error)
   }
 })
 
-router.put('/', (_req, res) => {
+router.put('/:tioAux', (_req, res) => {
   res.send('Se actualizó exitosamente')
 })
 

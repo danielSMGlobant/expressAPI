@@ -1,4 +1,4 @@
-import { Visibility, Weather } from './enums'
+import { NameBrand, Visibility, Weather } from './enums'
 import { NewDiaryEntry, NewImc } from './types'
 
 const parseComment = (commentFromRequest: any): string => {
@@ -40,7 +40,7 @@ const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date))
 }
 
-const isWeather = (param: any): boolean => {
+export const isWeather = (param: any): boolean => {
   return Object.values(Weather).includes(param)
 }
 
@@ -99,4 +99,8 @@ export const validateTioAux = (value: string): string => {
     throw new Error('No se envio el valor correcto del parámetro tioAux')
   }
   return value
+}
+
+export const isBrand = (param: any): boolean => {
+  return Object.values(NameBrand).includes(param)
 }
