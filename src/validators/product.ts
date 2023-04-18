@@ -1,5 +1,6 @@
-import { check } from 'express-validator'
+import { check, validationResult } from 'express-validator'
 import { isBrand } from '../utils'
+import { NextFunction, Request, Response } from 'express'
 // import { validateResult } from '../helpers/validateHelper'
 
 const isBrandValidate = (value: any): boolean => {
@@ -37,4 +38,16 @@ export const validatorCreateProduct = [
   //     console.log(req.body)
   //     validateResult(res, req, next)
   //   }
+]
+
+export const validatorQueryFilterProduct = [
+  check('search').exists(),
+  check('status').exists(),
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty()) {
+      return next()
+    }
+    return res.status(422).json({ error: errors.array() })
+  }
 ]

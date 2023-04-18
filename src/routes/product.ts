@@ -1,15 +1,16 @@
 import { validateTioAux } from './../utils'
 import express, { NextFunction, Request, Response } from 'express'
 import * as productServices from '../services/product.service'
-import { validatorCreateProduct } from '../validators/product'
+import { validatorCreateProduct, validatorQueryFilterProduct } from '../validators/product'
 import { validateResult } from '../helpers/validateHelper'
+import { getFilteredItems, getItems } from '../controller/product.controller'
 
 // import { ProductTcRequest } from '../types'
 const router = express.Router()
 
-router.get('/', (_req, res) => {
-  res.send(productServices.getProductTc())
-})
+router.get('/', getItems)
+
+router.get('/filter', validatorQueryFilterProduct, getFilteredItems)
 
 router.get('/:tioAux', (req, res) => {
   try {

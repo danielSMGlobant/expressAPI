@@ -11,3 +11,11 @@ export const validateResult = (req: any, res: any, next: any): any => {
     res.send({ errors: error.array() }) // Enviamos los errores encontrados en un objeto JSON.
   }
 }
+
+export const validateResultFilter = (req: any, res: any, next: any): any => {
+  const errors = validationResult(req)
+  if (errors.isEmpty()) {
+    return next()
+  }
+  return res.status(422).json({ error: errors.array() })
+}

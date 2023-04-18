@@ -33,7 +33,7 @@ export interface ProductTc {
   commercialName: string
   brandName: brandName
   creditCardLevel: string
-  status: string
+  status: boolean
   plasticChoice: string
   nickname: string
   minCreditLine: string

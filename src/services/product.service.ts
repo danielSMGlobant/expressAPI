@@ -4,7 +4,7 @@ import productData from '../data/productTc.json'
 const productsTc: ProductTc[] = productData as ProductTc[]
 
 export const getProductTc = (): ProductsTc[] => {
-  const products = productsTc.map(item => ({
+  const products = productsTc.map((item) => ({
     bin: item.bin,
     logoCode: item.logoCode,
     tioAux: item.tioAux,
@@ -15,6 +15,17 @@ export const getProductTc = (): ProductsTc[] => {
   }))
 
   return products
+}
+
+export const filterProducts = (term: string, status: boolean): ProductsTc[] => {
+  console.log('busqueda por ', term, status)
+  const productsFiltered = productsTc.filter(
+    (product) =>
+      (product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
+      product.commercialName.toLowerCase().includes(term.trim().toLowerCase())) &&
+      product.status === status
+  )
+  return productsFiltered
 }
 
 export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
