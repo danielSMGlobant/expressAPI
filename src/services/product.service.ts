@@ -17,15 +17,36 @@ export const getProductTc = (): ProductsTc[] => {
   return products
 }
 
-export const filterProducts = (term: string, status: boolean): ProductsTc[] => {
+export const filterProducts = (term: string, status: string): ProductsTc[] => {
   console.log('busqueda por ', term, status)
-  const productsFiltered = productsTc.filter(
-    (product) =>
-      (product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
-      product.commercialName.toLowerCase().includes(term.trim().toLowerCase())) &&
-      product.status === status
-  )
-  return productsFiltered
+  const statusBoolean: boolean = status === 'true'
+
+  const filterCriteria = (product: ProductsTc): any => {
+    const containsTerm =
+      product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
+      product.commercialName.toLowerCase().includes(term.trim().toLowerCase())
+    const hasMatchingStatus = product.status === statusBoolean
+    return status.length === 0
+      ? containsTerm
+      : containsTerm && hasMatchingStatus
+  }
+
+  // const productsFilteredWithoutStatus = productsTc.filter(
+  //   (product) =>
+  //     product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
+  //     product.commercialName.toLowerCase().includes(term.trim().toLowerCase())
+  // )
+
+  // const productsFilteredWithStatus = productsTc.filter(
+  //   (product) =>
+  //     (product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
+  //       product.commercialName
+  //         .toLowerCase()
+  //         .includes(term.trim().toLowerCase())) &&
+  //     product.status === statusBoolean
+  // )
+  const resultFilter: ProductsTc[] = productsTc.filter(filterCriteria)
+  return resultFilter
 }
 
 export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
