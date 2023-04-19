@@ -1,5 +1,6 @@
 import { ProductTc, ProductTcRequest, ProductsTc } from './../types.d'
 import productData from '../data/productTc.json'
+import { toStatus } from '../helpers/product.helpers'
 
 const productsTc: ProductTc[] = productData as ProductTc[]
 
@@ -17,35 +18,19 @@ export const getProductTc = (): ProductsTc[] => {
   return products
 }
 
-export const filterProducts = (term: string, status: string): ProductsTc[] => {
-  console.log('busqueda por ', term, status)
-  const statusBoolean: boolean = status === 'true'
+export const filterProducts = (status: string, term: string): ProductsTc[] => {
+  const statusFilter: boolean = toStatus(status)
 
   const filterCriteria = (product: ProductsTc): any => {
     const containsTerm =
       product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
-      product.commercialName.toLowerCase().includes(term.trim().toLowerCase())
-    const hasMatchingStatus = product.status === statusBoolean
-    return status.length === 0
-      ? containsTerm
-      : containsTerm && hasMatchingStatus
+      product.commercialName
+        .toLowerCase()
+        .includes(term.trim().toLowerCase())
+    const hasMatchingStatus = product.status === statusFilter
+    return status === 'all' ? containsTerm : containsTerm && hasMatchingStatus
   }
-
-  // const productsFilteredWithoutStatus = productsTc.filter(
-  //   (product) =>
-  //     product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
-  //     product.commercialName.toLowerCase().includes(term.trim().toLowerCase())
-  // )
-
-  // const productsFilteredWithStatus = productsTc.filter(
-  //   (product) =>
-  //     (product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
-  //       product.commercialName
-  //         .toLowerCase()
-  //         .includes(term.trim().toLowerCase())) &&
-  //     product.status === statusBoolean
-  // )
-  const resultFilter: ProductsTc[] = productsTc.filter(filterCriteria)
+  const resultFilter: ProductsTc[] = getProductTc().filter(filterCriteria)
   return resultFilter
 }
 

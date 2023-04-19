@@ -3,14 +3,14 @@ import express, { NextFunction, Request, Response } from 'express'
 import * as productServices from '../services/product.service'
 import { validatorCreateProduct, validatorQueryFilterProduct } from '../validators/product'
 import { validateResult } from '../helpers/validateHelper'
-import { getFilteredItems, getItems } from '../controller/product.controller'
+import { getFilteredItems } from '../controller/product.controller'
 
 // import { ProductTcRequest } from '../types'
 const router = express.Router()
 
-router.get('/', getItems)
+// router.get('/', getItems)
 
-router.get('/filter', validatorQueryFilterProduct, getFilteredItems)
+router.get('/', validatorQueryFilterProduct, getFilteredItems)
 
 router.get('/:tioAux', (req, res) => {
   try {

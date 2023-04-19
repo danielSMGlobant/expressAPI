@@ -41,8 +41,14 @@ export const validatorCreateProduct = [
 ]
 
 export const validatorQueryFilterProduct = [
-  check('search').exists(),
-  check('status').exists(),
+  // check('search').isString(),
+  check('status')
+    .exists()
+    .withMessage('No se ha enviado vacio el valor status')
+    .notEmpty()
+    .withMessage('Se ha enviado vacio el valor status')
+    .isIn(['true', 'false', 'all'])
+    .withMessage('No cumple con los valores permitiodos para status'),
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {
