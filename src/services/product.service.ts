@@ -1,4 +1,4 @@
-import { ProductTc, ProductTcRequest, ProductsTc } from './../types.d'
+import { ProductTc, ProductTcRequest, ProductsTc } from '../model/product.model'
 import productData from '../data/productTc.json'
 import { toStatus } from '../helpers/product.helpers'
 
