@@ -1,5 +1,5 @@
 export const toStatus = (value: any): boolean => {
-  return String(value) === 'true'
+  return String(value) === '1'
 }
 
 export const toTermSearch = (value: any): string => {

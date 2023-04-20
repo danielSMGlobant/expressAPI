@@ -16,7 +16,7 @@ export enum Visibility {
   Poor = 'poor'
 }
 
-export enum brandName {
+export enum BrandName {
   Amex = 'AMEX',
   Visa = 'VISA',
 }

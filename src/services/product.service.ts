@@ -28,7 +28,7 @@ export const filterProducts = (status: string, term: string): ProductsTc[] => {
         .toLowerCase()
         .includes(term.trim().toLowerCase())
     const hasMatchingStatus = product.status === statusFilter
-    return status === 'all' ? containsTerm : containsTerm && hasMatchingStatus
+    return status === '2' ? containsTerm : containsTerm && hasMatchingStatus
   }
   const resultFilter: ProductsTc[] = getProductTc().filter(filterCriteria)
   return resultFilter

@@ -1,7 +1,7 @@
 // export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy'
 // export type Visibility = 'great' | 'good' | 'ok' | 'poor'
 
-import { brandName, ProgramBenefitCode, Visibility, Weather } from './enums'
+import { BrandName, ProgramBenefitCode, Visibility, Weather } from './enums'
 
 export interface DiaryEntry {
   id: number
@@ -31,7 +31,7 @@ export interface ProductTc {
   binEnd: string
   productName: string
   commercialName: string
-  brandName: brandName
+  brandName: BrandName
   creditCardLevel: string
   status: boolean
   plasticChoice: string
@@ -43,17 +43,16 @@ export interface ProductTc {
   urlMobile: String
 }
 
-export type ProductsTc = Omit<
+// MÉTODO GET
+export type ProductsTc = Pick<
 ProductTc,
-| 'binStart'
-| 'binEnd'
-| 'productName'
-| 'creditCardLevel'
-| 'plasticChoice'
-| 'nickname'
-| 'minCreditLine'
-| 'maxCreditLine'
-| 'programBenefitCode'
-| 'urlMobile'
+| 'bin'
+| 'logoCode'
+| 'tioAux'
+| 'commercialName'
+| 'brandName'
+| 'status'
+| 'urlDesk'
 >
+
 export type ProductTcRequest = ProductTc

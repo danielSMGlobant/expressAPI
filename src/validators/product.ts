@@ -11,7 +11,7 @@ const isBrandValidate = (value: any): boolean => {
   return true
 }
 
-const patternTioAux = /^[a-zA-Z0-9]{6}$/
+const patternTioAux = /^[A-Z0-9]{6}$/
 
 export const validatorCreateProduct = [
   check('bin').exists().not().isEmpty().isString(),
@@ -47,8 +47,24 @@ export const validatorQueryFilterProduct = [
     .withMessage('No se ha enviado vacio el valor status')
     .notEmpty()
     .withMessage('Se ha enviado vacio el valor status')
-    .isIn(['true', 'false', 'all'])
+    .isIn(['1', '0', '2'])
     .withMessage('No cumple con los valores permitiodos para status'),
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty()) {
+      return next()
+    }
+    return res.status(422).json({ error: errors.array() })
+  }
+]
+
+export const validatoParamsTioAuxProduct = [
+  check('tioAux')
+    .exists()
+    .notEmpty() // En un Path Params no aplica esto
+    .withMessage('Se ha enviado vacio el valor tioaux')
+    .matches(patternTioAux)
+    .withMessage('No cumple con la estructura de un tioAux'),
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {

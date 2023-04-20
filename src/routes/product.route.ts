@@ -1,30 +1,16 @@
-import { validateTioAux } from './../utils'
+import { validateTioAux } from '../utils'
 import express, { NextFunction, Request, Response } from 'express'
 import * as productServices from '../services/product.service'
-import { validatorCreateProduct, validatorQueryFilterProduct } from '../validators/product'
+import { validatoParamsTioAuxProduct, validatorCreateProduct, validatorQueryFilterProduct } from '../validators/product'
 import { validateResult } from '../helpers/validateHelper'
-import { getFilteredItems } from '../controller/product.controller'
+import { getFilteredItems, getItemByTioAux } from '../controllers/product.controller'
 
 // import { ProductTcRequest } from '../types'
 const router = express.Router()
 
-// router.get('/', getItems)
-
 router.get('/', validatorQueryFilterProduct, getFilteredItems)
 
-router.get('/:tioAux', (req, res) => {
-  try {
-    const tioAux: string = validateTioAux(req.params.tioAux)
-    const product = productServices.findByTioAux(tioAux)
-    if (product === undefined) {
-      res.status(204).send() // No Content - La solicitud ha sido exitosa pero no devuelve contenido
-    } else {
-      res.send(product)
-    }
-  } catch (error: any) {
-    res.status(400).send(error.message) // Bad Request - La solicitud no es válida o tiene parámetros incorrectos
-  }
-})
+router.get('/:tioAux', validatoParamsTioAuxProduct, getItemByTioAux)
 
 // Ruta POST para crear un nuevo producto
 router.post('/', validatorCreateProduct, (req: Request, res: Response, next: NextFunction) => {

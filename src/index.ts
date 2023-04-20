@@ -1,7 +1,7 @@
 import express from 'express'
 import diaryRouter from './routes/diaries'
 import bmiRouter from './routes/bmi'
-import productRouter from './routes/product'
+import productRouter from './routes/product.route'
 
 const app = express()
 const PORT = 3000
