@@ -1,9 +1,8 @@
 import { validateTioAux } from '../utils'
-import express, { NextFunction, Request, Response } from 'express'
+import express from 'express'
 import * as productServices from '../services/product.service'
-import { validatoParamsTioAuxProduct, validatorCreateProduct, validatorQueryFilterProduct } from '../validators/product'
-import { validateResult } from '../helpers/validateHelper'
-import { getFilteredItems, getItemByTioAux } from '../controllers/product.controller'
+import { validatoParamsTioAuxProduct, validatorCreateProduct, validatorQueryFilterProduct, validatorProductExistence } from '../validators/product.validator'
+import { getFilteredItems, getItemByTioAux, postItem } from '../controllers/product.controller'
 
 // import { ProductTcRequest } from '../types'
 const router = express.Router()
@@ -12,17 +11,7 @@ router.get('/', validatorQueryFilterProduct, getFilteredItems)
 
 router.get('/:tioAux', validatoParamsTioAuxProduct, getItemByTioAux)
 
-// Ruta POST para crear un nuevo producto
-router.post('/', validatorCreateProduct, (req: Request, res: Response, next: NextFunction) => {
-  try {
-    validateResult(req, res, next)
-    const product = req.body
-    const respuesta = productServices.addProductTc(product)
-    res.status(201).json({ message: respuesta, product })
-  } catch (error) {
-    // console.log('error', error)
-  }
-})
+router.post('/', validatorCreateProduct, validatorProductExistence, postItem)
 
 router.put('/:tioAux', (_req, res) => {
   res.send('Se actualizó exitosamente')

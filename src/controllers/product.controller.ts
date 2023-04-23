@@ -21,3 +21,9 @@ export const getItemByTioAux = (req: Request, res: Response): any => {
 
   res.status(typeof product === 'undefined' ? 204 : 200).send(product)
 }
+
+export const postItem = (req: Request, res: Response): any => {
+  const product = req.body
+  const respuesta = productServices.addProductTc(product)
+  res.status(201).json({ message: respuesta, product })
+}

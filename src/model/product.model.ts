@@ -9,12 +9,12 @@ export interface ProductTc {
   productName: string
   commercialName: string
   brandName: BrandName
-  creditCardLevel: string
+  creditCardLevel: number
   status: boolean
   plasticChoice: boolean
   nickname: boolean
-  minCreditLine: string
-  maxCreditLine: string
+  minCreditLine: number
+  maxCreditLine: number
   programBenefitCode: ProgramBenefitCode
   urlDesk: string
   urlMobile: string
@@ -26,8 +26,7 @@ export interface ProductTc {
 
 // MÉTODO GET
 export type ProductsTc = Pick<
-ProductTc,
-| 'bin'
+ProductTc, 'bin'
 | 'logoCode'
 | 'tioAux'
 | 'commercialName'
@@ -36,4 +35,5 @@ ProductTc,
 | 'urlDesk'
 >
 
-export type ProductTcRequest = ProductTc
+export type ProductTcCreateRequest = Omit<
+ProductTc, 'lastModifiedBy' | 'lastModifiedDate'>

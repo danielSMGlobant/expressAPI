@@ -1,4 +1,8 @@
-import { ProductTc, ProductTcRequest, ProductsTc } from '../model/product.model'
+import {
+  ProductTc,
+  ProductTcCreateRequest,
+  ProductsTc
+} from '../model/product.model'
 import productData from '../data/productTc.json'
 import { toStatus } from '../helpers/product.helpers'
 
@@ -24,14 +28,31 @@ export const filterProducts = (status: string, term: string): ProductsTc[] => {
   const filterCriteria = (product: ProductsTc): any => {
     const containsTerm =
       product.tioAux.toLowerCase().includes(term.trim().toLowerCase()) ||
-      product.commercialName
-        .toLowerCase()
-        .includes(term.trim().toLowerCase())
+      product.commercialName.toLowerCase().includes(term.trim().toLowerCase())
     const hasMatchingStatus = product.status === statusFilter
     return status === '2' ? containsTerm : containsTerm && hasMatchingStatus
   }
   const resultFilter: ProductsTc[] = getProductTc().filter(filterCriteria)
   return resultFilter
+}
+
+export const validateProductExistence = (
+  tioAux: string,
+  bin: string,
+  logo: string
+): boolean => {
+  const findCriteria = (product: ProductsTc): any => {
+    // const hasMatchingStatus = product.status
+    const hasMatchingTioAux = product.tioAux === tioAux
+    const hasMatchingBin = product.bin === bin
+    const hasMatchingLogo = product.logoCode === logo
+
+    return (hasMatchingTioAux || hasMatchingBin || hasMatchingLogo)
+  }
+
+  const productFind = productsTc.find(findCriteria)
+
+  return typeof productFind !== 'undefined'
 }
 
 export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
@@ -44,8 +65,13 @@ export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
   return undefined
 }
 
-export const addProductTc = (newData: ProductTcRequest): string => {
-  productsTc.push(newData)
+export const addProductTc = (newData: ProductTcCreateRequest): string => {
+  const newDataCreate: ProductTc = {
+    ...newData,
+    lastModifiedBy: '',
+    lastModifiedDate: ''
+  }
+  productsTc.push(newDataCreate)
   return 'Se logró insertar de manera exitosa'
 }
 
