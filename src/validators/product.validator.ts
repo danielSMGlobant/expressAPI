@@ -59,7 +59,51 @@ export const validatorCreateProduct = [
   }
 ]
 
-export const validatorProductExistence = (
+export const validatorUpdateProduct = [
+  check('bin').exists().notEmpty().isString().isLength({ min: 6, max: 6 }),
+  check('binStart').exists().isString().isLength({ max: 8 }),
+  check('binEnd').exists().isString().isLength({ max: 8 }),
+  check('logoCode')
+    .exists()
+    .notEmpty()
+    .isString()
+    .withMessage('Debe ser caracteres')
+    .isLength({ min: 3, max: 3 })
+    .withMessage('Valor de un logoCode es de 3 carácteres'),
+  check('tioAux')
+    .exists()
+    .notEmpty()
+    .isString()
+    .matches(patternTioAux)
+    .withMessage('No cumple con la estructura de un tioAux'),
+  check('productName').exists().notEmpty().isString(),
+  check('commercialName').exists().notEmpty().isString(),
+  check('brandName').exists().notEmpty().isString().custom(isBrandValidate),
+  check('creditCardLevel').exists().isNumeric(),
+  check('status').exists().notEmpty().isBoolean().not().isString(),
+  check('plasticChoice').exists().isBoolean().not().isString(),
+  check('nickname').exists().isBoolean().not().isString(),
+  check('minCreditLine').exists().isNumeric().not().isString(),
+  check('maxCreditLine').exists().isNumeric(),
+  check('programBenefitCode').exists().isString(),
+  check('urlDesk').exists().notEmpty().isString(),
+  check('urlMobile').exists().notEmpty().isString(),
+  check('lastModifiedBy').exists().notEmpty().isString(),
+  check('lastModifiedDate').exists().notEmpty().isString(),
+
+  // (req: any, res: any, next: any) => {
+  //   validateResult(res, req, next)
+  // }
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty()) {
+      return next()
+    }
+    return res.status(400).json({ error: errors.array() }) // Remplazo 422 por 400
+  }
+]
+
+export const validatorProductDuplicate = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -74,6 +118,24 @@ export const validatorProductExistence = (
     res.status(404).send({ message: 'Producto TC ya existe, no se puede volver a ingresar' })
   } else {
     next()
+  }
+}
+
+export const validatorProductExistence = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): any => {
+  if (
+    serviceProduct.validateProductExistence(
+      req.params.tioAux, '', ''
+      // req.body.bin,
+      // req.body.logoCode
+    )
+  ) {
+    next()
+  } else {
+    res.status(404).send({ message: 'Producto TC no existe' })
   }
 }
 

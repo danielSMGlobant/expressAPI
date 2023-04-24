@@ -37,3 +37,6 @@ ProductTc, 'bin'
 
 export type ProductTcCreateRequest = Omit<
 ProductTc, 'lastModifiedBy' | 'lastModifiedDate'>
+
+export type ProductTcUpdateRequest = Omit<
+ProductTc, 'createdBy' | 'createdDate'>

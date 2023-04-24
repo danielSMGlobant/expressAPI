@@ -1,8 +1,8 @@
 import { validateTioAux } from '../utils'
 import express from 'express'
 import * as productServices from '../services/product.service'
-import { validatoParamsTioAuxProduct, validatorCreateProduct, validatorQueryFilterProduct, validatorProductExistence } from '../validators/product.validator'
-import { getFilteredItems, getItemByTioAux, postItem } from '../controllers/product.controller'
+import { validatoParamsTioAuxProduct, validatorCreateProduct, validatorQueryFilterProduct, validatorProductExistence, validatorProductDuplicate, validatorUpdateProduct } from '../validators/product.validator'
+import { getFilteredItems, getItemByTioAux, postItem, putItem } from '../controllers/product.controller'
 
 // import { ProductTcRequest } from '../types'
 const router = express.Router()
@@ -11,11 +11,9 @@ router.get('/', validatorQueryFilterProduct, getFilteredItems)
 
 router.get('/:tioAux', validatoParamsTioAuxProduct, getItemByTioAux)
 
-router.post('/', validatorCreateProduct, validatorProductExistence, postItem)
+router.post('/', validatorCreateProduct, validatorProductDuplicate, postItem)
 
-router.put('/:tioAux', (_req, res) => {
-  res.send('Se actualizó exitosamente')
-})
+router.put('/:tioAux', validatorUpdateProduct, validatorProductExistence, putItem)
 
 router.delete('/:tioAux', (req, res) => {
   try {

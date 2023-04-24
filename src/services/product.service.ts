@@ -1,6 +1,7 @@
 import {
   ProductTc,
   ProductTcCreateRequest,
+  ProductTcUpdateRequest,
   ProductsTc
 } from '../model/product.model'
 import productData from '../data/productTc.json'
@@ -73,6 +74,20 @@ export const addProductTc = (newData: ProductTcCreateRequest): string => {
   }
   productsTc.push(newDataCreate)
   return 'Se logró insertar de manera exitosa'
+}
+
+export const updateProductTc = (updateData: ProductTcUpdateRequest): string => {
+  const index = productsTc.findIndex((product) => product.tioAux === updateData.tioAux)
+  const newDataUpdate: ProductTc = {
+    ...updateData,
+    createdBy: productsTc[index].createdBy,
+    createdDate: productsTc[index].createdDate
+  }
+
+  if (index !== -1) {
+    productsTc[index] = newDataUpdate
+  }
+  return 'Se logró actualizar de manera exitosa'
 }
 
 export const deleteProductTc = (tioAuxRequest: string): string => {
