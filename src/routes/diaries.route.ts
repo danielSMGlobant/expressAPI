@@ -1,7 +1,7 @@
 import express from 'express'
 import * as diaryServices from '../services/diaries.service'
 import { NewDiaryEntry } from '../types'
-import { toNewDiaryEntry } from '../utils'
+import { toNewDiaryEntry } from '../utils/utils'
 
 const router = express.Router()
 
@@ -29,4 +29,4 @@ router.post('/', (req, res) => {
   }
 })
 
-export default router
+export { router }

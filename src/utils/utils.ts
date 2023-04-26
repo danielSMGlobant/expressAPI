@@ -1,5 +1,5 @@
-import { BrandName, Visibility, Weather } from './enums'
-import { NewDiaryEntry, NewImc } from './types'
+import { Visibility, Weather } from '../interfaces/enums'
+import { NewDiaryEntry, NewImc } from '../types'
 
 const parseComment = (commentFromRequest: any): string => {
   if (!isString(commentFromRequest)) {
@@ -89,18 +89,14 @@ export const toNewImc = (object: any): NewImc => {
   return newData
 }
 
-const isTioaux = (value: string): boolean => {
-  const regex = /^[a-zA-Z0-9]{6}$/
-  return regex.test(value)
-}
+// const isTioaux = (value: string): boolean => {
+//   const regex = /^[a-zA-Z0-9]{6}$/
+//   return regex.test(value)
+// }
 
-export const validateTioAux = (value: string): string => {
-  if (!isTioaux(value)) {
-    throw new Error('No se envio el valor correcto del parámetro tioAux')
-  }
-  return value
-}
-
-export const isBrand = (param: any): boolean => {
-  return Object.values(BrandName).includes(param)
-}
+// export const validateTioAux = (value: string): string => {
+//   if (!isTioaux(value)) {
+//     throw new Error('No se envio el valor correcto del parámetro tioAux')
+//   }
+//   return value
+// }

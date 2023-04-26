@@ -1,6 +1,6 @@
-import { BrandName, ProgramBenefitCode } from '../enums'
+import { BrandName, ProgramBenefitCode } from './enums'
 
-export interface ProductTc {
+export interface IProductTc {
   bin: string
   logoCode: string
   tioAux: string
@@ -26,7 +26,8 @@ export interface ProductTc {
 
 // MÉTODO GET
 export type ProductsTc = Pick<
-ProductTc, 'bin'
+IProductTc,
+| 'bin'
 | 'logoCode'
 | 'tioAux'
 | 'commercialName'
@@ -36,7 +37,11 @@ ProductTc, 'bin'
 >
 
 export type ProductTcCreateRequest = Omit<
-ProductTc, 'lastModifiedBy' | 'lastModifiedDate'>
+IProductTc,
+'lastModifiedBy' | 'lastModifiedDate'
+>
 
 export type ProductTcUpdateRequest = Omit<
-ProductTc, 'createdBy' | 'createdDate'>
+IProductTc,
+'createdBy' | 'createdDate'
+>

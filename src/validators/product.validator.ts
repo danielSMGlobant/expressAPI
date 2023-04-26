@@ -1,5 +1,5 @@
 import { check, validationResult } from 'express-validator'
-import { isBrand } from '../utils'
+import { isBrand } from '../utils/product.util'
 import { NextFunction, Request, Response } from 'express'
 import * as serviceProduct from '../services/product.service'
 // import { validateResult } from '../helpers/validateHelper'
@@ -115,7 +115,9 @@ export const validatorProductDuplicate = (
       req.body.logoCode
     )
   ) {
-    res.status(404).send({ message: 'Producto TC ya existe, no se puede volver a ingresar' })
+    res
+      .status(404)
+      .send({ message: 'Producto TC ya existe, no se puede volver a ingresar' })
   } else {
     next()
   }
@@ -128,7 +130,9 @@ export const validatorProductExistence = (
 ): any => {
   if (
     serviceProduct.validateProductExistence(
-      req.params.tioAux, '', ''
+      req.params.tioAux,
+      '',
+      ''
       // req.body.bin,
       // req.body.logoCode
     )

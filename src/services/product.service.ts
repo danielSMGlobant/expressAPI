@@ -1,16 +1,16 @@
 import {
-  ProductTc,
+  IProductTc,
   ProductTcCreateRequest,
   ProductTcUpdateRequest,
   ProductsTc
-} from '../model/product.model'
+} from '../interfaces/product.interface'
 import productData from '../data/productTc.json'
-import { toStatus } from '../helpers/product.helpers'
+import { toStatus } from '../utils/product.util'
 
-const productsTc: ProductTc[] = productData as ProductTc[]
+const productsTcData: IProductTc[] = productData as IProductTc[]
 
 export const getProductTc = (): ProductsTc[] => {
-  const products = productsTc.map((item) => ({
+  const products = productsTcData.map((item) => ({
     bin: item.bin,
     logoCode: item.logoCode,
     tioAux: item.tioAux,
@@ -37,6 +37,47 @@ export const filterProducts = (status: string, term: string): ProductsTc[] => {
   return resultFilter
 }
 
+export const findByTioAux = (tioAuxRequest: string): IProductTc | undefined => {
+  const product = productsTcData.find((d) => d.tioAux === tioAuxRequest)
+  return product
+}
+
+export const addProductTc = (newData: ProductTcCreateRequest): IProductTc => {
+  const newDataCreate: IProductTc = {
+    ...newData,
+    lastModifiedBy: '',
+    lastModifiedDate: ''
+  }
+  productsTcData.push(newDataCreate)
+  return newDataCreate
+}
+
+export const updateProductTc = (
+  updateData: ProductTcUpdateRequest
+): IProductTc => {
+  const index = productsTcData.findIndex(
+    (product) => product.tioAux === updateData.tioAux
+  )
+  const newDataUpdate: IProductTc = {
+    ...updateData,
+    createdBy: productsTcData[index].createdBy,
+    createdDate: productsTcData[index].createdDate
+  }
+
+  if (index !== -1) {
+    productsTcData[index] = newDataUpdate
+  }
+  return newDataUpdate
+}
+
+export const deleteProductTc = (tioAuxRequest: string): string => {
+  const index = productsTcData.findIndex((d) => d.tioAux === tioAuxRequest)
+
+  productsTcData.splice(index, 1)
+
+  return 'Producto Tc eliminado exitosamente'
+}
+
 export const validateProductExistence = (
   tioAux: string,
   bin: string,
@@ -48,52 +89,10 @@ export const validateProductExistence = (
     const hasMatchingBin = product.bin === bin
     const hasMatchingLogo = product.logoCode === logo
 
-    return (hasMatchingTioAux || hasMatchingBin || hasMatchingLogo)
+    return hasMatchingTioAux || hasMatchingBin || hasMatchingLogo
   }
 
-  const productFind = productsTc.find(findCriteria)
+  const productFind = productsTcData.find(findCriteria)
 
   return typeof productFind !== 'undefined'
-}
-
-export const findByTioAux = (tioAuxRequest: string): ProductTc | undefined => {
-  const product = productsTc.find((d) => d.tioAux === tioAuxRequest)
-
-  if (product != null) {
-    return product
-  }
-
-  return undefined
-}
-
-export const addProductTc = (newData: ProductTcCreateRequest): string => {
-  const newDataCreate: ProductTc = {
-    ...newData,
-    lastModifiedBy: '',
-    lastModifiedDate: ''
-  }
-  productsTc.push(newDataCreate)
-  return 'Se logró insertar de manera exitosa'
-}
-
-export const updateProductTc = (updateData: ProductTcUpdateRequest): string => {
-  const index = productsTc.findIndex((product) => product.tioAux === updateData.tioAux)
-  const newDataUpdate: ProductTc = {
-    ...updateData,
-    createdBy: productsTc[index].createdBy,
-    createdDate: productsTc[index].createdDate
-  }
-
-  if (index !== -1) {
-    productsTc[index] = newDataUpdate
-  }
-  return 'Se logró actualizar de manera exitosa'
-}
-
-export const deleteProductTc = (tioAuxRequest: string): string => {
-  const index = productsTc.findIndex((d) => d.tioAux === tioAuxRequest)
-
-  productsTc.splice(index, 1)
-
-  return 'Producto Tc eliminado exitosamente'
 }

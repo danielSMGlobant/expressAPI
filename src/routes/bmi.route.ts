@@ -1,7 +1,7 @@
 import express from 'express'
 import * as bmiServices from '../services/bmi.service'
 import { NewImc } from '../types'
-import { toNewImc, validateQueryString } from '../utils'
+import { toNewImc, validateQueryString } from '../utils/utils'
 
 const router = express.Router()
 
@@ -17,4 +17,4 @@ router.get('/', (req, res) => {
   }
 })
 
-export default router
+export { router }

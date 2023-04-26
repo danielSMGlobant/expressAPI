@@ -1,7 +1,7 @@
 import express from 'express'
-import diaryRouter from './routes/diaries'
-import bmiRouter from './routes/bmi'
-import productRouter from './routes/product.route'
+import * as diaryRouter from './routes/diaries.route'
+import * as bmiRouter from './routes/bmi.route'
+import router from './routes/index'
 
 const app = express()
 const PORT = 3000
@@ -19,9 +19,9 @@ app.get('/ping', (_req, res) => {
   res.send('pong - pong')
 })
 
-app.use('/api/diaries', diaryRouter) // Ejemplo API Diario de Vuelo
-app.use('/bmi', bmiRouter)
-app.use('/bs-credit-card-product', productRouter)
+app.use('/api/diaries', diaryRouter.router) // Ejemplo API Diario de Vuelo
+app.use('/bmi', bmiRouter.router) // Ejemplo de API BMI
+app.use('/apiUX', router) // API UX DEMO
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
