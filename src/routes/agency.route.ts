@@ -7,16 +7,21 @@ import {
   postAgencyItem,
   putAgencyItem
 } from '../controllers/agency.controller'
+import {
+  validatorCodeAgency,
+  validatorCreateAgency,
+  validatorUpdateAgency
+} from '../validators/agency.validator'
 const router = express.Router()
 
 router.get('/', getAgencyItems)
 
-router.get('/:code', getAgencyItem)
+router.get('/:code', validatorCodeAgency, getAgencyItem)
 
-router.post('/', postAgencyItem)
+router.post('/', validatorCreateAgency, postAgencyItem)
 
-router.put('/:code', putAgencyItem)
+router.put('/:code', validatorUpdateAgency, putAgencyItem)
 
-router.delete('/:code', deleteAgencyItem)
+router.delete('/:code', validatorCodeAgency, deleteAgencyItem)
 
 export { router }

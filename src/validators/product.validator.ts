@@ -147,7 +147,7 @@ export const validatorQueryFilterProduct = [
   // check('search').isString(),
   check('status')
     .exists()
-    .withMessage('No se ha enviado vacio el valor status')
+    .withMessage('No se ha enviado el valor status')
     .notEmpty()
     .withMessage('Se ha enviado vacio el valor status')
     .isIn(['1', '0', '2'])
