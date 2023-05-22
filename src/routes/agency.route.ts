@@ -12,11 +12,12 @@ import {
   validatorCreateAgency,
   validatorUpdateAgency
 } from '../validators/agency.validator'
+import { logMiddleware } from '../middlewares/log.middleware'
 const router = express.Router()
 
-router.get('/', getAgencyItems)
+router.get('/', logMiddleware, getAgencyItems)
 
-router.get('/:code', validatorCodeAgency, getAgencyItem)
+router.get('/:code', logMiddleware, validatorCodeAgency, getAgencyItem)
 
 router.post('/', validatorCreateAgency, postAgencyItem)
 
