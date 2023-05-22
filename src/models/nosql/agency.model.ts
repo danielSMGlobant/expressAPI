@@ -1,15 +1,38 @@
-import express from 'express'
+// import { Schema, Types, model, Model } from 'mongoose'
+import { Schema, model } from 'mongoose'
+import { IAgency } from '../../interfaces/agency.interface'
 
-const router = express.Router()
+const AgencySchema = new Schema<IAgency>(
+  {
+    code: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    status: {
+      type: Boolean,
+      required: true
+    },
+    year: {
+      type: Number
+    },
+    address: {
+      type: String,
+      required: true
+    },
+    ubigeo: {
+      type: String,
+      required: true
+    }
+  },
+  {
+    timestamps: true, // TODO: createAt, updateAt
+    versionKey: false
+  }
+)
 
-router.get('/')
-
-router.get('/:id')
-
-router.post('/')
-
-router.put('/:id')
-
-router.delete('/:id')
-
-export { router }
+export const AgencyModel = model('agency', AgencySchema)

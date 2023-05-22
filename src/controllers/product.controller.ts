@@ -3,6 +3,7 @@ import * as productServices from '../services/product.service'
 import { toTermSearch } from '../utils/product.util'
 import { handleHttp } from '../utils/error.handler'
 
+// CONSULTAR A JSON
 export const getItems = (_req: Request, res: Response): any => {
   try {
     res.send(productServices.getProductTc())

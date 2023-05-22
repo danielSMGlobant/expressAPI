@@ -1,14 +1,22 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express'
+import {
+  deleteAgencyItem,
+  getAgencyItem,
+  getAgencyItems,
+  postAgencyItem,
+  putAgencyItem
+} from '../controllers/agency.controller'
 const router = express.Router()
 
-router.get('/', (_req, res) => {
-  res.send('Listar Agencias')
-})
+router.get('/', getAgencyItems)
 
-router.get('/:id')
+router.get('/:code', getAgencyItem)
 
-router.post('/')
+router.post('/', postAgencyItem)
 
-router.put('/:id')
+router.put('/:code', putAgencyItem)
+
+router.delete('/:code', deleteAgencyItem)
 
 export { router }

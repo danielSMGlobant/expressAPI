@@ -74,9 +74,10 @@ const ProductSchema = new mongoose.Schema<IProductTc>(
     }
   },
   {
+    // collection: 'productsTc',
     timestamps: true, // TODO: createAt, updateAt
     versionKey: false
   }
 )
 
-module.exports = mongoose.model('productsTc', ProductSchema)
+export const ProductsTcModel = mongoose.model('productsTc', ProductSchema)
