@@ -14,7 +14,6 @@ import {
   putItem
 } from '../controllers/product.controller'
 
-// import { ProductTcRequest } from '../types'
 const router = express.Router()
 
 router.get('/', validatorQueryFilterProduct, getFilteredItems)
@@ -30,6 +29,8 @@ router.put(
   putItem
 )
 
+export { router }
+
 // router.delete('/:tioAux', (req, res) => {
 //   try {
 //     const tioAux: string = validateTioAux(req.params.tioAux)
@@ -44,5 +45,3 @@ router.put(
 //     res.status(400).send(error.message) // Bad Request - La solicitud no es válida o tiene parámetros incorrectos
 //   }
 // })
-
-export { router }

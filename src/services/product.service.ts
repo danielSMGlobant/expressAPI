@@ -17,6 +17,7 @@ export const getProductTc = (): ProductsTc[] => {
     commercialName: item.commercialName,
     brandName: item.brandName,
     status: item.status,
+    creditCardLevel: item.creditCardLevel,
     urlDesk: item.urlDesk
   }))
 
