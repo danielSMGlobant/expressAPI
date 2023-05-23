@@ -21,7 +21,7 @@ router.get('/:code', logMiddleware, validatorCodeAgency, getAgencyItem)
 
 router.post('/', validatorCreateAgency, postAgencyItem)
 
-router.put('/:code', validatorUpdateAgency, putAgencyItem)
+router.put('/:code', validatorCodeAgency, validatorUpdateAgency, putAgencyItem)
 
 router.delete('/:code', validatorCodeAgency, deleteAgencyItem)
 

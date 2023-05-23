@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import * as productServices from '../services/product.service'
 import { toTermSearch } from '../utils/product.util'
-import { handleHttp } from '../utils/error.handler'
+import { handleHttp } from '../utils/handlerError'
 
 // CONSULTAR A JSON
 export const getItems = (_req: Request, res: Response): any => {

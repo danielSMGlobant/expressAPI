@@ -10,7 +10,7 @@ export const validateResults = (
     validationResult(req).throw()
     return next()
   } catch (error: any) {
-    res.status(400)
+    res.status(400) // BAD Request
     res.send({ error: error.array() })
   }
 }

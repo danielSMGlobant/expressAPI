@@ -35,4 +35,5 @@ const AgencySchema = new Schema<IAgency>(
   }
 )
 
-export const AgencyModel = model('agency', AgencySchema)
+// export const AgencyModel = model('agency', AgencySchema)
+export const AgencyModel = model('agencies', AgencySchema)
