@@ -11,6 +11,7 @@ const PORT = process.env.PORT ?? 3000
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('src/storage'))
 
 app.use('/apiBS', router) // API BS DEMO
 

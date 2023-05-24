@@ -14,6 +14,9 @@
 # enviroment
 .env
 
+# storage
+src/storage/*
+
 # profiling files
 chrome-profiler-events*.json
 
