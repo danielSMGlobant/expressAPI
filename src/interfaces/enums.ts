@@ -6,7 +6,7 @@ export enum Weather {
   Rainy = 'rainy',
   Cloudy = 'cloudy',
   Windy = 'windy',
-  Stormy = 'stormy',
+  Stormy = 'stormy'
 }
 
 export enum Visibility {
@@ -18,10 +18,15 @@ export enum Visibility {
 
 export enum BrandName {
   Amex = 'AMEX',
-  Visa = 'VISA',
+  Visa = 'VISA'
 }
 
 export enum ProgramBenefitCode {
   Latampass = 'LATAMPASS',
-  Null = 'null',
+  Null = 'null'
+}
+
+export enum RolUser {
+  Admin = 'Admin',
+  User = 'User'
 }
