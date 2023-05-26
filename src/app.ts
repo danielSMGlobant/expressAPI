@@ -1,10 +1,12 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 // import * as diaryRouter from './routes/diaries.route'
 // import * as bmiRouter from './routes/bmi.route'
 import router from './routes/index'
 import cors from 'cors'
 import 'dotenv/config'
 import dbConnect from '../config/mongo'
+import morganBody from 'morgan-body'
+import { loggerStream } from './utils/handlerLogger'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -12,6 +14,13 @@ const PORT = process.env.PORT ?? 3000
 app.use(express.json())
 app.use(cors())
 app.use(express.static('src/storage'))
+morganBody(app, {
+  noColors: true,
+  stream: loggerStream,
+  skip: (_req: Request, res: Response) => {
+    return res.statusCode < 400
+  }
+})
 
 app.use('/apiBS', router) // API BS DEMO
 
