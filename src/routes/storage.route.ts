@@ -8,15 +8,16 @@ import {
   postStorage
 } from '../controllers/storage.controller'
 import { validatorIdStorage } from '../validators/storage.validator'
+import { authMiddleware } from '../middlewares/auth.middleware'
 
 const router = express.Router()
 
-router.get('/', getStorageItems)
+router.get('/', authMiddleware, getStorageItems)
 
-router.get('/:id', validatorIdStorage, getStorageItem)
+router.get('/:id', authMiddleware, validatorIdStorage, getStorageItem)
 
-router.post('/', uploadMiddleware.single('myFile'), postStorage)
+router.post('/', authMiddleware, uploadMiddleware.single('myFile'), postStorage)
 
-router.delete('/:id', validatorIdStorage, deleteStorageItem)
+router.delete('/:id', authMiddleware, validatorIdStorage, deleteStorageItem)
 
 export { router }

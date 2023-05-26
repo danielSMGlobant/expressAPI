@@ -12,3 +12,8 @@ export const getUserAuth = async (mailUser: string): Promise<any> => {
   )
   return response
 }
+
+export const getUserSessionAuth = async (id: any): Promise<any> => {
+  const response = await UserModel.findOne({ _id: id }).select('name mail rol')
+  return response
+}

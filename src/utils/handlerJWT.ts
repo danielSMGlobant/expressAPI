@@ -21,6 +21,7 @@ export const verifyToken = async (tokenJWT: string): Promise<any> => {
   try {
     return jsonwebtoken.verify(tokenJWT, JWT_SECRET)
   } catch (error) {
+    console.error('Token inválido', error)
     return null
   }
 }

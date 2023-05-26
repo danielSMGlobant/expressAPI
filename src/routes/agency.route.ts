@@ -12,17 +12,23 @@ import {
   validatorCreateAgency,
   validatorUpdateAgency
 } from '../validators/agency.validator'
-import { logMiddleware } from '../middlewares/log.middleware'
+import { authMiddleware } from '../middlewares/auth.middleware'
 const router = express.Router()
 
-router.get('/', logMiddleware, getAgencyItems)
+router.get('/', authMiddleware, getAgencyItems)
 
-router.get('/:code', logMiddleware, validatorCodeAgency, getAgencyItem)
+router.get('/:code', authMiddleware, validatorCodeAgency, getAgencyItem)
 
-router.post('/', validatorCreateAgency, postAgencyItem)
+router.post('/', authMiddleware, validatorCreateAgency, postAgencyItem)
 
-router.put('/:code', validatorCodeAgency, validatorUpdateAgency, putAgencyItem)
+router.put(
+  '/:code',
+  authMiddleware,
+  validatorCodeAgency,
+  validatorUpdateAgency,
+  putAgencyItem
+)
 
-router.delete('/:code', validatorCodeAgency, deleteAgencyItem)
+router.delete('/:code', authMiddleware, validatorCodeAgency, deleteAgencyItem)
 
 export { router }
