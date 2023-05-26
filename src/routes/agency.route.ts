@@ -13,22 +13,42 @@ import {
   validatorUpdateAgency
 } from '../validators/agency.validator'
 import { authMiddleware } from '../middlewares/auth.middleware'
+import { checkRol } from '../middlewares/rol.middleware'
 const router = express.Router()
 
-router.get('/', authMiddleware, getAgencyItems)
+router.get('/', authMiddleware, checkRol(['User']), getAgencyItems)
 
-router.get('/:code', authMiddleware, validatorCodeAgency, getAgencyItem)
+router.get(
+  '/:code',
+  authMiddleware,
+  checkRol(['User']),
+  validatorCodeAgency,
+  getAgencyItem
+)
 
-router.post('/', authMiddleware, validatorCreateAgency, postAgencyItem)
+router.post(
+  '/',
+  authMiddleware,
+  checkRol(['User', 'Admin']),
+  validatorCreateAgency,
+  postAgencyItem
+)
 
 router.put(
   '/:code',
   authMiddleware,
+  checkRol(['User', 'Admin']),
   validatorCodeAgency,
   validatorUpdateAgency,
   putAgencyItem
 )
 
-router.delete('/:code', authMiddleware, validatorCodeAgency, deleteAgencyItem)
+router.delete(
+  '/:code',
+  authMiddleware,
+  checkRol(['User', 'Admin']),
+  validatorCodeAgency,
+  deleteAgencyItem
+)
 
 export { router }

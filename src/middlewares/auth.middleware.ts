@@ -3,13 +3,6 @@ import { handleHttpError } from '../utils/handlerError'
 import { verifyToken } from '../utils/handlerJWT'
 import { getUserSessionAuth } from '../services/auth.service'
 
-// Extender la interfaz Request de Express para agregar un valor user
-// declare module 'express' {
-//   interface Request {
-//     user: string
-//   }
-// }
-
 export const authMiddleware = async (
   req: Request,
   res: Response,
@@ -36,8 +29,8 @@ export const authMiddleware = async (
 
     const userSession = await getUserSessionAuth(dataToken._id)
     // req.user = userSession // NO PUEDO USARLO POR QUE ME SALE UN ERROR QUE EL VALOR USER NO ES PARTE DE REQUEST en EXPRESS
+    res.locals.user = userSession
 
-    console.log(userSession)
     next()
   } catch (error) {
     handleHttpError(res, 'NOT_SESSION', 'No tiene sesion valida', 401)
