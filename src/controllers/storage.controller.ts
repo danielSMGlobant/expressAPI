@@ -27,7 +27,7 @@ export const postStorage = async (
     const response = await insertStorage(fileData)
     res.status(201).send(response)
   } catch (error) {
-    handleHttpError(res, 'ERROR_POST_STORAGE', error, 400)
+    handleHttpError(res, 'ERROR_POST_STORAGE', error, 404)
   }
 }
 

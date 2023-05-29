@@ -7,6 +7,8 @@ import 'dotenv/config'
 import dbConnect from '../config/mongo'
 import morganBody from 'morgan-body'
 import { loggerStream } from './utils/handlerLogger'
+import swaggerUI from 'swagger-ui-express'
+import { openAPICongifiguration } from './docs/swagger'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -14,6 +16,7 @@ const PORT = process.env.PORT ?? 3000
 app.use(express.json())
 app.use(cors())
 app.use(express.static('src/storage'))
+
 morganBody(app, {
   noColors: true,
   stream: loggerStream,
@@ -21,6 +24,12 @@ morganBody(app, {
     return res.statusCode < 400
   }
 })
+
+app.use(
+  '/documentation',
+  swaggerUI.serve,
+  swaggerUI.setup(openAPICongifiguration)
+)
 
 app.use('/apiBS', router) // API BS DEMO
 

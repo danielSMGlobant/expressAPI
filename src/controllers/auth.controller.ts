@@ -32,7 +32,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const reqClean = matchedData(req)
     const dataUser = await getUserAuth(reqClean.mail)
-    if (dataUser === undefined) {
+    if (dataUser === null) {
       handleHttpError(res, 'USERT_NOT_EXIST', 'No se encontro al usuario', 404)
       return
     }
