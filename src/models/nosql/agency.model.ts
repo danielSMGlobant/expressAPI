@@ -17,14 +17,23 @@ const AgencySchema = new Schema<IAgency>(
       type: Boolean,
       required: true
     },
-    year: {
-      type: Number
-    },
-    address: {
+    region: {
       type: String,
       required: true
     },
-    ubigeo: {
+    province: {
+      type: String,
+      required: true
+    },
+    district: {
+      type: String,
+      required: true
+    },
+    geolocation: {
+      type: String,
+      required: true
+    },
+    address: {
       type: String,
       required: true
     }
@@ -35,5 +44,4 @@ const AgencySchema = new Schema<IAgency>(
   }
 )
 
-// export const AgencyModel = model('agency', AgencySchema)
 export const AgencyModel = model('agencies', AgencySchema)

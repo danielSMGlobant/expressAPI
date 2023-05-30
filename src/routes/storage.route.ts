@@ -31,7 +31,7 @@ const router = express.Router()
  *                      schema:
  *                        type: array
  *                        items:
- *                          $ref: "#/components/schemas/storageGet"
+ *                          $ref: "#/components/schemas/storageGetRes"
  *              '401':
  *                  description: No tiene sesión valida
  *              '404':
@@ -63,7 +63,7 @@ router.get('/', authMiddleware, getStorageItems)
  *                  content:
  *                    application/json:
  *                      schema:
- *                          $ref: "#/components/schemas/storageGet"
+ *                          $ref: "#/components/schemas/storageGetRes"
  *              '400':
  *                  description: Error por enviar parametros incorrectos
  *              '401':

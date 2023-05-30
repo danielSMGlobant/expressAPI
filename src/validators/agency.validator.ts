@@ -7,7 +7,7 @@ export const validatorCodeAgency = [
     .exists()
     .notEmpty()
     .isString()
-    .isLength({ min: 5, max: 5 })
+    .isLength({ min: 5, max: 6 })
     .withMessage('Debe tener 5 carácteres'),
   (req: Request, res: Response, next: NextFunction) => {
     return validateResults(req, res, next)
@@ -18,31 +18,37 @@ export const validatorCreateAgency = [
     .exists()
     .notEmpty()
     .isString()
-    .isLength({ min: 5, max: 5 })
+    .isLength({ min: 5, max: 6 })
     .withMessage('Debe tener 5 carácteres'),
   check('name').exists().notEmpty().isString(),
   check('status').exists().notEmpty().isBoolean(),
-  check('year')
+  check('region')
     .exists()
     .notEmpty()
-    .isNumeric()
-    .isLength({ min: 4, max: 4 })
-    .withMessage('Debe tener 4 carácteres'),
-  check('address').exists().notEmpty().isString(),
-  check('ubigeo')
+    .isString()
+    .isLength({ min: 2, max: 2 })
+    .withMessage('Debe tener 2 carácteres'),
+  check('province')
+    .exists()
+    .notEmpty()
+    .isString()
+    .isLength({ min: 2, max: 2 })
+    .withMessage('Debe tener 2 carácteres'),
+  check('district')
+    .exists()
+    .notEmpty()
+    .isString()
+    .isLength({ min: 2, max: 2 })
+    .withMessage('Debe tener 2 carácteres'),
+  check('geolocation')
     .exists()
     .notEmpty()
     .isString()
     .isLength({ min: 6, max: 6 })
     .withMessage('Debe tener 6 carácteres'),
+  check('address').exists().notEmpty().isString(),
+
   (req: Request, res: Response, next: NextFunction) => {
-    // try {
-    //   validationResult(req).throw()
-    //   return next()
-    // } catch (error: any) {
-    //   res.status(400)
-    //   res.send({ error: error.array() })
-    // }
     return validateResults(req, res, next)
   }
 ]
@@ -50,19 +56,31 @@ export const validatorCreateAgency = [
 export const validatorUpdateAgency = [
   check('name').exists().notEmpty().isString(),
   check('status').exists().notEmpty().isBoolean(),
-  check('year')
+  check('region')
     .exists()
     .notEmpty()
-    .isNumeric()
-    .isLength({ min: 4, max: 4 })
-    .withMessage('Debe tener 4 carácteres'),
-  check('address').exists().notEmpty().isString(),
-  check('ubigeo')
+    .isString()
+    .isLength({ min: 2, max: 2 })
+    .withMessage('Debe tener 2 carácteres'),
+  check('province')
+    .exists()
+    .notEmpty()
+    .isString()
+    .isLength({ min: 2, max: 2 })
+    .withMessage('Debe tener 2 carácteres'),
+  check('district')
+    .exists()
+    .notEmpty()
+    .isString()
+    .isLength({ min: 2, max: 2 })
+    .withMessage('Debe tener 2 carácteres'),
+  check('geolocation')
     .exists()
     .notEmpty()
     .isString()
     .isLength({ min: 6, max: 6 })
     .withMessage('Debe tener 6 carácteres'),
+  check('address').exists().notEmpty().isString(),
   (req: Request, res: Response, next: NextFunction) => {
     return validateResults(req, res, next)
   }

@@ -2,7 +2,9 @@ export interface IAgency {
   code: string
   name: string
   status: boolean
-  year: number
+  region: string
+  province: string
+  district: string
+  geolocation: string
   address: string
-  ubigeo: string
 }

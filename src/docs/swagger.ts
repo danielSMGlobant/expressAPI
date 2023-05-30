@@ -122,7 +122,7 @@ const swaggerDefinition = {
           }
         }
       },
-      agency: {
+      agencyPostReq: {
         type: 'object',
         required: [],
         properties: {
@@ -135,25 +135,70 @@ const swaggerDefinition = {
           status: {
             type: 'boolean'
           },
-          year: {
-            type: 'integer'
-          },
-          address: {
+          region: {
             type: 'string'
           },
-          ubigeo: {
+          province: {
+            type: 'string'
+          },
+          district: {
+            type: 'string'
+          },
+          geolocation: {
+            type: 'string'
+          },
+          address: {
             type: 'string'
           }
         }
       },
-      storageGet: {
+      agencyPutReq: {
         type: 'object',
         required: [],
         properties: {
+          code: {
+            type: 'string'
+          },
+          name: {
+            type: 'string'
+          },
+          status: {
+            type: 'boolean'
+          },
+          region: {
+            type: 'string'
+          },
+          province: {
+            type: 'string'
+          },
+          district: {
+            type: 'string'
+          },
+          geolocation: {
+            type: 'string'
+          },
+          address: {
+            type: 'string'
+          }
+        }
+      },
+      storageGetRes: {
+        type: 'object',
+        required: [],
+        properties: {
+          _id: {
+            type: 'string'
+          },
           url: {
             type: 'string'
           },
           fileName: {
+            type: 'string'
+          },
+          createdAt: {
+            type: 'string'
+          },
+          updatedAt: {
             type: 'string'
           }
         }
