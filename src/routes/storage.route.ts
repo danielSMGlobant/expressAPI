@@ -35,7 +35,7 @@ const router = express.Router()
  *              '401':
  *                  description: No tiene sesión valida
  *              '404':
- *                  description: Error de obtener la información
+ *                  description: Error al obtener la información
  */
 router.get('/', authMiddleware, getStorageItems)
 
@@ -46,7 +46,7 @@ router.get('/', authMiddleware, getStorageItems)
  *      get:
  *          tags:
  *              - storage
- *          sumary: "Listar Archivos"
+ *          sumary: "Detalle de un Archivos"
  *          description: "Esta ruta es para ver el detalle de un archivo"
  *          security:
  *            - bearerAuth: []

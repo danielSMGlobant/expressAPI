@@ -122,9 +122,56 @@ const swaggerDefinition = {
           }
         }
       },
-      agencyPostReq: {
+      agencyGetRes: {
         type: 'object',
         required: [],
+        properties: {
+          _id: {
+            type: 'string'
+          },
+          code: {
+            type: 'string'
+          },
+          name: {
+            type: 'string'
+          },
+          status: {
+            type: 'boolean'
+          },
+          region: {
+            type: 'string'
+          },
+          province: {
+            type: 'string'
+          },
+          district: {
+            type: 'string'
+          },
+          geolocation: {
+            type: 'string'
+          },
+          address: {
+            type: 'string'
+          },
+          createdAt: {
+            type: 'string'
+          },
+          updatedAt: {
+            type: 'string'
+          }
+        }
+      },
+      agencyPostReq: {
+        type: 'object',
+        required: [
+          'code',
+          'name',
+          'status',
+          'region',
+          'province',
+          'district',
+          'address'
+        ],
         properties: {
           code: {
             type: 'string'
@@ -154,11 +201,15 @@ const swaggerDefinition = {
       },
       agencyPutReq: {
         type: 'object',
-        required: [],
+        required: [
+          'name',
+          'status',
+          'region',
+          'province',
+          'district',
+          'address'
+        ],
         properties: {
-          code: {
-            type: 'string'
-          },
           name: {
             type: 'string'
           },
