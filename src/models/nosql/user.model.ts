@@ -1,8 +1,9 @@
-import { Schema, model } from 'mongoose'
+import mongoose from 'mongoose'
+
 import { IUser } from '../../interfaces/auth.interface'
 import { RolUser } from '../../interfaces/enums'
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new mongoose.Schema<IUser>(
   {
     name: {
       type: String,
@@ -14,6 +15,7 @@ const UserSchema = new Schema<IUser>(
     },
     mail: {
       type: String,
+      unique: true,
       required: true
     },
     password: {
@@ -33,4 +35,4 @@ const UserSchema = new Schema<IUser>(
   }
 )
 
-export const UserModel = model('users', UserSchema)
+export const UserModel = mongoose.model('users', UserSchema)

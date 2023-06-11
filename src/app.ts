@@ -12,6 +12,7 @@ import { openAPICongifiguration } from './docs/swagger'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
+const NODE_ENV = process.env.NODE_ENV ?? 'development'
 
 app.use(express.json())
 app.use(cors())
@@ -41,9 +42,11 @@ app.get('/', (_req, res) => {
 // app.use('/api/diaries', diaryRouter.router) // Ejemplo API Diario de Vuelo
 // app.use('/bmi', bmiRouter.router) // Ejemplo de API BMI
 
-app.listen(PORT, () => {
-  console.log(`Tu app esta lista por http://localhost:${PORT}`)
-})
+if (NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Tu app esta lista por http://localhost:${PORT}`)
+  })
+}
 
 // Invocar conexión con MongoDB
 dbConnect()
@@ -53,3 +56,5 @@ dbConnect()
   .catch((err) => {
     console.log('*** ERROR CONEXION ***', err)
   })
+
+export default app
