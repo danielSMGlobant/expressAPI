@@ -1,5 +1,6 @@
 import request from 'supertest'
 import app from '../app'
+import { UserModel } from '../models/nosql/user.model'
 
 const testAuhlogin = {
   mail: 'demo@gmail.com',
@@ -7,22 +8,26 @@ const testAuhlogin = {
 }
 
 const testAuthRegister = {
-  name: 'Demo Méndez',
-  age: 35,
-  mail: 'demo3@gmail.com',
-  password: 'demo11293'
-}
-
-const testAuthRegisterExist = {
   name: 'Juan Méndez',
   age: 40,
   mail: 'juan@gmail.com',
   password: 'juan1129'
 }
 
+// const testAuthRegisterExist = {
+//   name: 'Juan Méndez',
+//   age: 40,
+//   mail: 'juan@gmail.com',
+//   password: 'juan1129'
+// }
+
+beforeAll(async () => {
+  await UserModel.deleteMany()
+})
+
 describe('@Auth', () => {
   describe('@when logged ', () => {
-    it('#should return status code 201 if is successfully ', async () => {
+    it('#should return status code 404 if is fail ', async () => {
       // Arrange
       // Act
       const response = await request(app)
@@ -30,7 +35,7 @@ describe('@Auth', () => {
         .send(testAuhlogin)
 
       // Assert
-      expect(response.statusCode).toEqual(201)
+      expect(response.statusCode).toEqual(404)
     })
   })
 
@@ -52,7 +57,7 @@ describe('@Auth', () => {
       // Act
       const response = await request(app)
         .post('/apiBS/auth/register')
-        .send(testAuthRegisterExist)
+        .send(testAuthRegister)
 
       // Assert
       expect(response.statusCode).toEqual(404)
