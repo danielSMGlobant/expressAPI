@@ -4,5 +4,8 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
-  coveragePathIgnoraPatterns: ['node_modules/*']
+  coveragePathIgnoraPatterns: ['node_modules/*'],
+  globalTeardown: './global-kill.js',
+  collectCoverage: true,
+  coverageReporters: ['json', 'html']
 }
