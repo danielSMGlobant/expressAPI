@@ -1,28 +1,10 @@
 import request from 'supertest'
 import app from '../app'
 import { UserModel } from '../models/nosql/user.model'
-
-const testAuhlogin = {
-  mail: 'demo@gmail.com',
-  password: 'demo1129'
-}
-
-const testAuthRegister = {
-  name: 'Juan Méndez',
-  age: 40,
-  mail: 'juan@gmail.com',
-  password: 'juan1129'
-}
-
-// const testAuthRegisterExist = {
-//   name: 'Juan Méndez',
-//   age: 40,
-//   mail: 'juan@gmail.com',
-//   password: 'juan1129'
-// }
+import { testAuthLogin, testAuthRegister } from './helper/helperData'
 
 beforeAll(async () => {
-  await UserModel.deleteMany()
+  await UserModel.deleteMany({})
 })
 
 describe('@Auth', () => {
@@ -32,7 +14,7 @@ describe('@Auth', () => {
       // Act
       const response = await request(app)
         .post('/apiBS/auth/login')
-        .send(testAuhlogin)
+        .send(testAuthLogin)
 
       // Assert
       expect(response.statusCode).toEqual(404)
