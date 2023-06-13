@@ -11,7 +11,7 @@ const filePath = path.resolve(__dirname, './dump/imgDemo.jpg')
 
 beforeAll(async () => {
   await UserModel.deleteMany({})
-  await StorageModel.deleteMany()
+  await StorageModel.deleteMany({})
   const user = await UserModel.create(testUserStorageAuthRegister)
   JWT_TOKEN = await tokenSing(user)
 })
