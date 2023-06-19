@@ -58,7 +58,7 @@ export const putCreditCardItem = async (
     const reqClean = matchedData(req)
     const { tioAux, ...item } = reqClean
     const response = await updateCreditCard(tioAux, item as ICreditCard)
-    res.status(201).send(response)
+    res.status(200).send(response)
   } catch (error) {
     handleHttpError(res, 'ERROR_PUT_ITEM', error, 404)
   }

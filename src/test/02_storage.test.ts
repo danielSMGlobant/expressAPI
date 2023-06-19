@@ -17,6 +17,26 @@ beforeAll(async () => {
 })
 
 describe('@Storage', () => {
+  describe('@when consult GET method', () => {
+    it('#should return 200 with correct token', async () => {
+      // Arrange
+      // Act
+      const response = await request(app)
+        .get('/apiBS/storage')
+        .set('Authorization', `Bearer ${JWT_TOKEN}`)
+      // Assert
+      expect(response.statusCode).toEqual(200)
+    })
+
+    it('#should return 401 if no token provided', async () => {
+      // Arrange
+      // Act
+      const response = await request(app).get('/apiBS/storage')
+      // Assert
+      expect(response.statusCode).toEqual(401)
+    })
+  })
+
   describe('@when file is uploaded', () => {
     it('#should return 201 status code data file', async () => {
       // Arrange
@@ -35,26 +55,6 @@ describe('@Storage', () => {
       const response = await request(app)
         .post('/apiBS/storage')
         .attach('myFile', filePath)
-      // Assert
-      expect(response.statusCode).toEqual(401)
-    })
-  })
-
-  describe('@when consult GET method', () => {
-    it('#should return 200 with correct token', async () => {
-      // Arrange
-      // Act
-      const response = await request(app)
-        .get('/apiBS/storage')
-        .set('Authorization', `Bearer ${JWT_TOKEN}`)
-      // Assert
-      expect(response.statusCode).toEqual(200)
-    })
-
-    it('#should return 401 if no token provided', async () => {
-      // Arrange
-      // Act
-      const response = await request(app).get('/apiBS/storage')
       // Assert
       expect(response.statusCode).toEqual(401)
     })
