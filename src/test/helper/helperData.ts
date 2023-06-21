@@ -10,9 +10,22 @@ export const testAuthRegister = {
   password: 'juan1129'
 }
 
+export const testAuthRegisterQA = {
+  name: 'Clara Méndez',
+  age: 40,
+  mail: 'clara@gmail.com',
+  password: 'clara1234',
+  rol: 'QA'
+}
+
 export const testAuthLoginUser = {
   mail: 'juan@gmail.com',
   password: 'juan1129'
+}
+
+export const testAuthLoginQA = {
+  mail: 'clara@gmail.com',
+  password: 'clara1234'
 }
 
 export const testUserStorageAuthRegister = {

@@ -70,14 +70,14 @@ const parseWeight = (weightFromRequest: any): number => {
   if (isNaN(weightFromRequest)) {
     throw new Error('No se envio correctamente el valor de weight')
   }
-  return weightFromRequest
+  return Number(weightFromRequest)
 }
 
 const parseHeight = (heightFromRequest: any): number => {
   if (isNaN(heightFromRequest)) {
     throw new Error('No se envio correctamente el valor de height')
   }
-  return heightFromRequest
+  return Number(heightFromRequest)
 }
 
 export const toNewImc = (object: any): NewImc => {

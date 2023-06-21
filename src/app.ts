@@ -1,6 +1,4 @@
 import express, { Request, Response } from 'express'
-// import * as diaryRouter from './routes/diaries.route'
-// import * as bmiRouter from './routes/bmi.route'
 import router from './routes/index'
 import cors from 'cors'
 import 'dotenv/config'
@@ -38,9 +36,6 @@ app.use('/apiBS', router) // API BS DEMO
 app.get('/', (_req, res) => {
   res.send('Hello Full Stack!')
 })
-
-// app.use('/api/diaries', diaryRouter.router) // Ejemplo API Diario de Vuelo
-// app.use('/bmi', bmiRouter.router) // Ejemplo de API BMI
 
 if (NODE_ENV !== 'test') {
   app.listen(PORT, () => {

@@ -2,16 +2,23 @@ import request from 'supertest'
 import app from '../app'
 import { UserModel } from '../models/nosql/user.model'
 import { AgencyModel } from '../models/nosql/agency.model'
-import { testAgency, testAuthRegister } from './helper/helperData'
+import {
+  testAgency,
+  testAuthRegister,
+  testAuthRegisterQA
+} from './helper/helperData'
 import { tokenSing } from '../utils/handlerJWT'
 
 let JWT_TOKEN = ''
+let JWT_TOKEN_QA = ''
 
 beforeAll(async () => {
   await UserModel.deleteMany({})
   await AgencyModel.deleteMany({})
   const user = await UserModel.create(testAuthRegister)
+  const userQA = await UserModel.create(testAuthRegisterQA)
   JWT_TOKEN = await tokenSing(user)
+  JWT_TOKEN_QA = await tokenSing(userQA)
 })
 
 describe('@Agency', () => {
@@ -45,6 +52,16 @@ describe('@Agency', () => {
       const response = await request(app).get('/apiBS/agency')
       // Assert
       expect(response.statusCode).toEqual(401)
+    })
+
+    it('#should return status code 403 with correct token but the user QA does not have permissions', async () => {
+      // Arrange
+      // Act
+      const response = await request(app)
+        .get('/apiBS/agency')
+        .set('Authorization', `Bearer ${JWT_TOKEN_QA}`)
+      // Assert
+      expect(response.statusCode).toEqual(403)
     })
   })
 

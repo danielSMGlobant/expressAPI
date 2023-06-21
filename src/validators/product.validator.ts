@@ -88,8 +88,8 @@ export const validatorUpdateProduct = [
   check('programBenefitCode').exists().isString(),
   check('urlDesk').exists().notEmpty().isString(),
   check('urlMobile').exists().notEmpty().isString(),
-  check('lastModifiedBy').exists().notEmpty().isString(),
-  check('lastModifiedDate').exists().notEmpty().isString(),
+  // check('lastModifiedBy').exists().notEmpty().isString(),
+  // check('lastModifiedDate').exists().notEmpty().isString(),
 
   // (req: any, res: any, next: any) => {
   //   validateResult(res, req, next)

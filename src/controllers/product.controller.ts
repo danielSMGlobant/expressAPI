@@ -4,13 +4,13 @@ import { toTermSearch } from '../utils/product.util'
 import { handleHttp } from '../utils/handlerError'
 
 // CONSULTAR A JSON
-export const getItems = (_req: Request, res: Response): any => {
-  try {
-    res.send(productServices.getProductTc())
-  } catch (error) {
-    handleHttp(res, 'ERROR_GET_ITEMS', error)
-  }
-}
+// export const getItems = (_req: Request, res: Response): any => {
+//   try {
+//     res.send(productServices.getProductTc())
+//   } catch (error) {
+//     handleHttp(res, 'ERROR_GET_ITEMS', error)
+//   }
+// }
 
 export const getFilteredItems = (req: Request, res: Response): any => {
   try {

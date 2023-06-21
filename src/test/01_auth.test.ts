@@ -4,7 +4,8 @@ import { UserModel } from '../models/nosql/user.model'
 import {
   testAuthLogin,
   testAuthLoginUser,
-  testAuthRegister
+  testAuthRegister,
+  testAuthRegisterQA
 } from './helper/helperData'
 
 beforeAll(async () => {
@@ -12,7 +13,7 @@ beforeAll(async () => {
 })
 
 describe('@Auth', () => {
-  describe('@when register', () => {
+  describe('@when register user whith rol User', () => {
     it('#should return 201 and data user in response if user is new', async () => {
       // Arrange
       // Act
@@ -34,6 +35,20 @@ describe('@Auth', () => {
 
       // Assert
       expect(response.statusCode).toEqual(404)
+    })
+  })
+
+  describe('@when register user whith rol QA', () => {
+    it('#should return 201 and data user in response if user is new', async () => {
+      // Arrange
+      // Act
+      const response = await request(app)
+        .post('/apiBS/auth/register')
+        .send(testAuthRegisterQA)
+
+      // Assert
+      expect(response.statusCode).toEqual(201)
+      expect(response.body).toHaveProperty('user')
     })
   })
 

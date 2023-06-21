@@ -75,6 +75,17 @@ describe('@CreditCard', () => {
       // Assert
       expect(response.statusCode).toEqual(204)
     })
+
+    it('#should return 400 status code and the credit card item with tioAux invalid', async () => {
+      // Arrange
+      const tioAuxFail = 'VISVIS123'
+      // Act
+      const response = await request(app)
+        .get(`/apiBS/creditCard/${tioAuxFail}`)
+        .set('Authorization', `Bearer ${JWT_TOKEN}`)
+      // Assert
+      expect(response.statusCode).toEqual(400)
+    })
   })
 
   describe('@when call PUT method', () => {

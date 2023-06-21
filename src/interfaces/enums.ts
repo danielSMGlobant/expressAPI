@@ -28,5 +28,6 @@ export enum ProgramBenefitCode {
 
 export enum RolUser {
   Admin = 'Admin',
-  User = 'User'
+  User = 'User',
+  QA = 'QA'
 }

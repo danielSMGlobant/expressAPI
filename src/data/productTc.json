@@ -9,7 +9,7 @@
         "commercialName": "American Exp Daniel LATAM Pass",
         "brandName": "AMEX",
         "creditCardLevel": 2,
-        "status": false,
+        "status": true,
         "plasticChoice": false,
         "nickname": true,
         "minCreditLine": 5000,
