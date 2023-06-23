@@ -133,4 +133,24 @@ describe('@Agency', () => {
       expect(response.statusCode).toEqual(200)
     })
   })
+
+  // describe('@when call DELETE method', () => {
+  //   let code = ''
+
+  //   it('#should return id on any item', async () => {
+  //     const response = await AgencyModel.findOne()
+  //     code = Object(response).code
+  //   })
+
+  //   it('#should return states 401 if send incorrect data', async () => {
+  //     // Arrange
+  //     const JWT_TOKEN_INVALID = '123WER'
+  //     // Act
+  //     const response = await request(app)
+  //       .delete(`/apiBS/agency/${code}`)
+  //       .set('Authorization', `Bearer ${JWT_TOKEN_INVALID}`)
+  //     // Assert
+  //     expect(response.statusCode).toEqual(401)
+  //   })
+  // })
 })

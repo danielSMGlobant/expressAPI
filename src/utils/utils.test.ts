@@ -77,11 +77,58 @@ describe('@Utils', () => {
 
     it('#should return error if the data is not sent correctly ', () => {
       // Arrange
-      const queryParmeters = {}
+      const queryParmeters = {
+        comment: null,
+        date: 'null',
+        weather: 'verano',
+        visibility: 'indefinido'
+      }
       // Act
       // const response = util.toNewImc(valorEnviado)
       // Assert
-      expect(() => util.validateQueryString(queryParmeters)).toThrow()
+      expect(() => util.toNewDiaryEntry(queryParmeters)).toThrowError()
+    })
+
+    it('#should return error if the data is not sent correctly ', () => {
+      // Arrange
+      const queryParmeters = {
+        comment: 'null',
+        date: null,
+        weather: 'windy',
+        visibility: 'indefinido'
+      }
+      // Act
+      // const response = util.toNewImc(valorEnviado)
+      // Assert
+      expect(() => util.toNewDiaryEntry(queryParmeters)).toThrowError()
+    })
+
+    it('#should return error if the data is not sent correctly ', () => {
+      // Arrange
+      const queryParmeters = {
+        comment: 'null',
+        date: '12',
+        weather: null,
+        visibility: 'indefinido'
+      }
+      // Act
+      // const response = util.toNewImc(valorEnviado)
+      // Assert
+      expect(() => util.toNewDiaryEntry(queryParmeters)).toThrowError()
+    })
+
+    it('#should return error if the data is not sent correctly ', () => {
+      // Arrange
+      const queryParmeters = {
+        comment: 'null',
+        date: '12',
+        weather: 'windy',
+        visibility: null
+      }
+      // Act
+      // const response = util.toNewImc(valorEnviado)
+      // Assert
+      expect(() => util.toNewDiaryEntry(queryParmeters)).toThrowError()
     })
   })
 })
