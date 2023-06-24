@@ -26,6 +26,18 @@ describe('@CreditCard', () => {
       // Assert
       expect(response.statusCode).toEqual(201)
     })
+
+    it('#should return status code 400 if send incorrect required data', async () => {
+      // Arrange
+      const testCreditCardIncorrect = { ...testCreditCard, brandName: 'MASTER' }
+      // Act
+      const response = await request(app)
+        .post('/apiBS/creditCard')
+        .set('Authorization', `Bearer ${JWT_TOKEN}`)
+        .send(testCreditCardIncorrect)
+      // Assert
+      expect(response.statusCode).toEqual(400)
+    })
   })
 
   describe('@when call GET method', () => {
