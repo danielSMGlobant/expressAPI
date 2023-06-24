@@ -13,6 +13,17 @@ describe('@Product', () => {
       // Assert
       expect(response.statusCode).toEqual(201)
     })
+
+    it('#should return status code 400 if send correct required data', async () => {
+      // Arrange
+      const testProductInvalid = { ...testProduct, brandName: 'MASTER' }
+      // Act
+      const response = await request(app)
+        .post('/apiBS/product')
+        .send(testProductInvalid)
+      // Assert
+      expect(response.statusCode).toEqual(400)
+    })
   })
 
   describe('@when call GET method', () => {

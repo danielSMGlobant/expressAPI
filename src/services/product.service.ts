@@ -71,13 +71,13 @@ export const updateProductTc = (
   return newDataUpdate
 }
 
-export const deleteProductTc = (tioAuxRequest: string): string => {
-  const index = productsTcData.findIndex((d) => d.tioAux === tioAuxRequest)
+// export const deleteProductTc = (tioAuxRequest: string): string => {
+//   const index = productsTcData.findIndex((d) => d.tioAux === tioAuxRequest)
 
-  productsTcData.splice(index, 1)
+//   productsTcData.splice(index, 1)
 
-  return 'Producto Tc eliminado exitosamente'
-}
+//   return 'Producto Tc eliminado exitosamente'
+// }
 
 export const validateProductExistence = (
   tioAux: string,
