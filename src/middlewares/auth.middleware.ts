@@ -14,7 +14,7 @@ export const authMiddleware = async (
       return
     }
 
-    const token: string = String(req.headers.authorization.split(' ').pop())
+    const token: string = req.headers.authorization.split(' ').pop() as string
     const dataToken = await verifyToken(token)
 
     if (dataToken._id === undefined) {

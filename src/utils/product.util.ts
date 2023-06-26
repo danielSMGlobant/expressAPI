@@ -1,7 +1,7 @@
 import { BrandName } from '../interfaces/enums'
 
 export const toStatus = (value: any): boolean => {
-  return String(value) === '1'
+  return (value as string) === '1'
 }
 
 export const toTermSearch = (value: any): string => {

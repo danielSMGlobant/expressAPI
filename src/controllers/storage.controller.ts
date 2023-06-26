@@ -10,7 +10,7 @@ import { matchedData } from 'express-validator'
 import fs from 'fs'
 import path from 'path'
 
-const PUBLIC_URL = String(process.env.PUBLIC_URL)
+const PUBLIC_URL = process.env.PUBLIC_URL as string
 const MEDIA_PATH = path.resolve(__dirname, '../storage')
 
 export const postStorage = async (
@@ -64,7 +64,7 @@ export const deleteStorageItem = async (
     const { id } = matchedData(req)
     const data = await getStorage(id)
     const { fileName } = data
-    const filePath = `${MEDIA_PATH}/${String(fileName)}`
+    const filePath = `${MEDIA_PATH}/${fileName as string}`
     fs.unlinkSync(filePath)
     const response = await deleteStorage(id)
     res.status(response === null ? 204 : 200).send(response)

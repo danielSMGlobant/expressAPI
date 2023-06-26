@@ -1,6 +1,6 @@
 import { IncomingWebhook } from '@slack/webhook'
 
-const SLACK_WEBHOOK = String(process.env.SLACK_WEBHOOK)
+const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK as string
 const webHook = new IncomingWebhook(SLACK_WEBHOOK)
 export const loggerStream: any = {
   write: async (message: string) => {

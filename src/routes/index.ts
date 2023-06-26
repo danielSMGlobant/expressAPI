@@ -1,15 +1,15 @@
 import { readdirSync } from 'fs'
-import express from 'express'
+import express, { Router } from 'express'
 
-const router = express.Router()
+const router: Router = express.Router()
 const PATH_ROUTER = `${__dirname}`
 
 const cleanFileName = (fileName: string): string => {
-  const file = String(fileName.split('.').shift())
+  const file = fileName.split('.').shift() as string
   return file
 }
 
-readdirSync(PATH_ROUTER).filter((fileName: string) => {
+const loadRouter = (fileName: string): void => {
   const cleanName = cleanFileName(fileName)
   if (cleanName !== 'index') {
     import(`./${cleanName}.route`)
@@ -20,7 +20,8 @@ readdirSync(PATH_ROUTER).filter((fileName: string) => {
         console.log('Error importando dinámicamente', e)
       })
   }
-  return 'rutas'
-})
+}
+
+readdirSync(PATH_ROUTER).filter((fileName: string) => loadRouter(fileName))
 
 export default router

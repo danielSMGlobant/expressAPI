@@ -1,6 +1,6 @@
-import swaggerJsdoc from 'swagger-jsdoc'
+import swaggerJsdoc, { OAS3Definition, OAS3Options } from 'swagger-jsdoc'
 
-const swaggerDefinition = {
+const swaggerDefinition: OAS3Definition = {
   openapi: '3.0.0',
   info: {
     title: 'API BS - Credit Card',
@@ -258,7 +258,7 @@ const swaggerDefinition = {
   }
 }
 
-const options = {
+const options: OAS3Options = {
   swaggerDefinition,
   apis: ['./src/routes/*.ts']
 }

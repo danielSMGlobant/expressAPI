@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   },
   filename: (_req, file, cb) => {
     // Crear el nombre del archivo como se guardará
-    const ext = String(file.originalname.split('.').pop())
+    const ext = file.originalname.split('.').pop() as string
     const fileName = `file-${Date.now()}.${ext}`
     cb(null, fileName)
   }

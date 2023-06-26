@@ -15,7 +15,7 @@ import { handleHttp } from '../utils/handlerError'
 export const getFilteredItems = (req: Request, res: Response): any => {
   try {
     const filteredProducts = productServices.filterProducts(
-      String(req.query.status),
+      req.query.status as string,
       toTermSearch(req.query.search)
     )
 
