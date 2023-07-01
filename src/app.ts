@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import express, { Request, Response } from 'express'
 import router from './routes/index'
 import cors from 'cors'
@@ -7,10 +8,12 @@ import morganBody from 'morgan-body'
 import { loggerStream } from './utils/handlerLogger'
 import swaggerUI from 'swagger-ui-express'
 import { openAPICongifiguration } from './docs/swagger'
+import { dbConnectMysql } from '../config/mysql'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
 const NODE_ENV = process.env.NODE_ENV ?? 'development'
+const ENGINE_DB = process.env.ENGINE_DB
 
 app.use(express.json())
 app.use(cors())
@@ -44,12 +47,6 @@ if (NODE_ENV !== 'test') {
 }
 
 // Invocar conexión con MongoDB
-dbConnect()
-  .then(() => {
-    console.log('*** CONEXION EXITOSA CON BD ***')
-  })
-  .catch((err) => {
-    console.log('*** ERROR CONEXION ***', err)
-  })
+ENGINE_DB === 'nosql' ? dbConnect() : dbConnectMysql()
 
 export default app

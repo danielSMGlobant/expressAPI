@@ -7,9 +7,15 @@ const dbConnect = async (): Promise<void> => {
     NODE_ENV === 'test'
       ? (process.env.DB_URI_TEST as string)
       : (process.env.DB_URI as string)
-  await connect(DB_URI, {
-    autoIndex: true
-  })
+
+  try {
+    await connect(DB_URI, {
+      autoIndex: true
+    })
+    console.log('*** CONEXION EXITOSA CON BD ***')
+  } catch (error) {
+    console.log('*** ERROR CONEXION ***', error)
+  }
 }
 
 export default dbConnect
