@@ -1,7 +1,10 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../../../config/mysql'
+import { IUser } from '../../interfaces/auth.interface'
 
-export const user = sequelize.define(
+interface UserInstance extends Model<IUser>, IUser {}
+
+export const User = sequelize.define<UserInstance>(
   'users',
   {
     name: {
@@ -9,15 +12,18 @@ export const user = sequelize.define(
       allowNull: false
     },
     age: {
-      type: DataTypes.NUMBER
+      type: DataTypes.NUMBER,
+      allowNull: false
     },
-    email: {
-      type: DataTypes.STRING
+    mail: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     password: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    roles: {
+    rol: {
       type: DataTypes.ENUM('user', 'admin')
     }
   },
