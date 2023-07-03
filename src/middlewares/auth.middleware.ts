@@ -17,7 +17,7 @@ export const authMiddleware = async (
     const token: string = req.headers.authorization.split(' ').pop() as string
     const dataToken = await verifyToken(token)
 
-    if (dataToken._id === undefined) {
+    if (dataToken.id === undefined) {
       handleHttpError(
         res,
         'ERROR_ID_TOKEN',
@@ -27,7 +27,7 @@ export const authMiddleware = async (
       return
     }
 
-    const userSession = await getUserSessionAuth(dataToken._id)
+    const userSession = await getUserSessionAuth(dataToken.id)
     // req.user = userSession // NO PUEDO USARLO POR QUE ME SALE UN ERROR QUE EL VALOR USER NO ES PARTE DE REQUEST en EXPRESS
     res.locals.user = userSession
 

@@ -1,33 +1,43 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../../../config/mysql'
+import { IAgency } from '../../interfaces/agency.interface'
 
-export const Agency = sequelize.define(
-  'agency',
+interface AgencyInstance extends Model<IAgency>, IAgency {}
+
+export const Agency = sequelize.define<AgencyInstance>(
+  'agencies',
   {
     code: {
       type: DataTypes.STRING,
       allowNull: false
     },
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     status: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     },
     region: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     province: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    distric: {
-      type: DataTypes.STRING
+    district: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     geolocation: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     address: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {

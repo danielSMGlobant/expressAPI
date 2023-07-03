@@ -10,6 +10,7 @@ export const validatorRegister = [
     .withMessage('Debe tener entre 3 a 99 carácteres'),
   check('age').exists().notEmpty().isNumeric(),
   check('mail').exists().notEmpty().isEmail(),
+  check('rol').exists().notEmpty(),
   check('password')
     .exists()
     .notEmpty()

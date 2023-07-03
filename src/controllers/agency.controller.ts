@@ -57,8 +57,8 @@ export const putAgencyItem = async (
   try {
     const reqClean = matchedData(req)
     const { code, ...item } = reqClean
-    const response = await updateAgency(code, item as IAgency)
-    res.status(200).send(response)
+    await updateAgency(code, item as IAgency)
+    res.status(200)
   } catch (error) {
     handleHttpError(res, 'ERROR_PUT_ITEM', error, 404)
   }
@@ -70,9 +70,9 @@ export const deleteAgencyItem = async (
 ): Promise<void> => {
   try {
     const reqClean = matchedData(req)
-    const code = reqClean.code
-    const response = await deleteAgency(code)
-    res.status(200).send(response)
+    const code = reqClean.code as string
+    await deleteAgency(code)
+    res.status(200).send(`Se eliminó correctamente la agencia ${code}`)
   } catch (error) {
     handleHttpError(res, 'ERROR_DELETE_ITEM', error, 404)
   }

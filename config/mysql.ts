@@ -18,3 +18,12 @@ export const dbConnectMysql = async (): Promise<void> => {
     console.log('MYSQL Error de conexion', error)
   }
 }
+
+sequelize
+  .sync({ force: false }) // Pasa { force: true } si deseas eliminar y recrear la tabla en cada sincronización
+  .then(() => {
+    console.log('Modelo sincronizado con la base de datos')
+  })
+  .catch((error) => {
+    console.error('Error al sincronizar el modelo:', error)
+  })

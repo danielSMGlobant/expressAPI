@@ -1,18 +1,19 @@
 import { IAgency } from '../interfaces/agency.interface'
-import { AgencyModel } from '../models/nosql/agency.model'
+import { Agency } from '../models/mysql/agency.model'
 
 export const getAgencies = async (): Promise<any> => {
-  const response = await AgencyModel.find({})
+  const response = await Agency.findAll()
   return response
 }
 
 export const getAgency = async (codeAgency: string): Promise<any> => {
-  const response = await AgencyModel.findOne({ code: codeAgency })
+  const QUERY = { where: { code: codeAgency } }
+  const response = await Agency.findOne(QUERY)
   return response
 }
 
 export const insertAgency = async (data: IAgency): Promise<any> => {
-  const response = await AgencyModel.create(data)
+  const response = await Agency.create(data)
   return response
 }
 
@@ -20,15 +21,15 @@ export const updateAgency = async (
   codeAgency: string,
   data: IAgency
 ): Promise<any> => {
-  const response = await AgencyModel.findOneAndUpdate(
-    { code: codeAgency },
-    data,
-    { new: true }
-  )
+  const response = await Agency.update(data, {
+    where: {
+      code: codeAgency
+    }
+  })
   return response
 }
 
 export const deleteAgency = async (codeAgency: string): Promise<any> => {
-  const response = await AgencyModel.deleteOne({ code: codeAgency })
+  const response = await Agency.destroy({ where: { code: codeAgency } })
   return response
 }

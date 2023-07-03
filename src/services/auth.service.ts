@@ -1,9 +1,9 @@
 import { IUser } from '../interfaces/auth.interface'
 import { User } from '../models/mysql/user.model'
-import { UserModel } from '../models/nosql/user.model'
-import { getProperties } from '../utils/handlerPropertiesEngine'
+// import { UserModel } from '../models/nosql/user.model'
+// import { getProperties } from '../utils/handlerPropertiesEngine'
 
-const PROPERTIES_KEY = getProperties()
+// const PROPERTIES_KEY = getProperties()
 
 export const registerUserAuth = async (data: IUser): Promise<any> => {
   // const response = await UserModel.create(data)
@@ -18,9 +18,10 @@ export const getUserAuth = async (mailUser: string): Promise<any> => {
 }
 
 export const getUserSessionAuth = async (id: any): Promise<any> => {
-  const QUERY = {
-    [PROPERTIES_KEY.id]: id
-  }
-  const response = await UserModel.findOne(QUERY)
+  // const QUERY = {
+  //   [PROPERTIES_KEY.id]: id
+  // }
+  const QUERY = { where: { id } }
+  const response = await User.findOne(QUERY)
   return response
 }
