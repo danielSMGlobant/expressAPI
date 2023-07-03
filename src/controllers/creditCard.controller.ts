@@ -57,8 +57,8 @@ export const putCreditCardItem = async (
   try {
     const reqClean = matchedData(req)
     const { tioAux, ...item } = reqClean
-    const response = await updateCreditCard(tioAux, item as ICreditCard)
-    res.status(200).send(response)
+    await updateCreditCard(tioAux, item as ICreditCard)
+    res.sendStatus(200)
   } catch (error) {
     handleHttpError(res, 'ERROR_PUT_ITEM', error, 404)
   }
@@ -70,9 +70,9 @@ export const deleteCreditCardItem = async (
 ): Promise<void> => {
   try {
     const reqClean = matchedData(req)
-    const tioAux = reqClean.tioAux
-    const response = await deleteCreditCard(tioAux)
-    res.status(200).send(response)
+    const tioAux = reqClean.tioAux as string
+    await deleteCreditCard(tioAux)
+    res.status(200).send(`Se elimino exitosamente el ${tioAux}`)
   } catch (error) {
     handleHttpError(res, 'ERROR_DELETE_ITEM', error, 404)
   }

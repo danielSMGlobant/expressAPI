@@ -55,8 +55,6 @@ export const validatorCreateCreditCard = [
   check('urlDesk').exists().notEmpty().isString(),
   check('urlMobile').exists().notEmpty().isString(),
   check('createdBy').exists().notEmpty().isString(),
-  check('createdDate').exists().notEmpty().isString(),
-
   (req: Request, res: Response, next: NextFunction) => {
     return validateResults(req, res, next)
   }

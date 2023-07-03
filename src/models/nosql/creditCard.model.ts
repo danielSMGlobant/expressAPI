@@ -63,14 +63,8 @@ const CreditCardSchema = new mongoose.Schema<ICreditCard>(
     createdBy: {
       type: String
     },
-    createdDate: {
-      type: String // TODO: Cambiar a Date
-    },
     lastModifiedBy: {
       type: String
-    },
-    lastModifiedDate: {
-      type: String // TODO: Cambiar a Date
     }
   },
   {

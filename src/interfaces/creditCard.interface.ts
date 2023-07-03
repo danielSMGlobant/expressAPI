@@ -19,7 +19,7 @@ export interface ICreditCard {
   urlDesk: string
   urlMobile: string
   createdBy: string
-  createdDate: string // TODO: Cambiar a Date
+  // createdDate: string // TODO: Cambiar a Date
   lastModifiedBy: string
-  lastModifiedDate: string // TODO: Cambiar a Date
+  // lastModifiedDate: string // TODO: Cambiar a Date
 }

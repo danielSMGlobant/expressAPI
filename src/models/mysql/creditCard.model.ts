@@ -1,7 +1,10 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../../../config/mysql'
+import { ICreditCard } from '../../interfaces/creditCard.interface'
 
-export const CreditCard = sequelize.define(
+interface CreditCardInstance extends Model<ICreditCard>, ICreditCard {}
+
+export const CreditCard = sequelize.define<CreditCardInstance>(
   'creditCard',
   {
     bin: {
@@ -15,16 +18,20 @@ export const CreditCard = sequelize.define(
       type: DataTypes.STRING
     },
     logoCode: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     tioAux: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     productName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     commercialName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     brandName: {
       type: DataTypes.STRING
@@ -33,7 +40,9 @@ export const CreditCard = sequelize.define(
       type: DataTypes.NUMBER
     },
     status: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     },
     plasticChoice: {
       type: DataTypes.BOOLEAN
@@ -59,14 +68,8 @@ export const CreditCard = sequelize.define(
     createdBy: {
       type: DataTypes.STRING
     },
-    createdDate: {
-      type: DataTypes.STRING // TODO: Cambiar a Date
-    },
     lastModifiedBy: {
       type: DataTypes.STRING
-    },
-    lastModifiedDate: {
-      type: DataTypes.STRING // TODO: Cambiar a Date
     }
   },
   {
